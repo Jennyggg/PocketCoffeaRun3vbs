@@ -2,7 +2,7 @@
 
 object_preselection:
   Muon:
-    pt: 35
+    pt: 30
     eta: 2.4
     iso: 0.15  
     id: tightId
@@ -10,17 +10,23 @@ object_preselection:
     dr_lepton: 0.3
     pt: 30
     eta: 4.7
-    jetId: 6
+    jetId: 2
     puId:
       wp: L
       value: 4
       maxpt: 50.0
     btag:
-      wp: M
+       wp: L
   Electron:
-    pt: 30
+    pt: 35
     eta: 2.4
     iso: 0.06
     id: mvaFall17V2Iso_WP90
+  FatJet:
+    dr_lepton: 0.8
+    pt: 180
+    jetId: 0
+    eta: 2.4
+    msd: 40
 
   
