@@ -106,6 +106,9 @@ pocket-coffea run --cfg example_config_semileptonic.py \
                   --limit-files 1 \
                   --limit-chunks 2
 
+#Useful example to run with dask:
+pocket-coffea run --cfg config_semilep.py  -o outputs/ht_study_dy_kfact_v3_signal_test/ -e dask@lxplus --queue longlunch  --process-separately --chunk-size 50000 --scaleout 200 --mem-per-worker 12GB --overwrite
+
 #For test use this command
 pocket-coffea run --cfg example_config_semileptonic.py --test -o outputs/test
 
