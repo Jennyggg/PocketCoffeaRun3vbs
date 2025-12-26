@@ -1,0 +1,39 @@
+default_jets_calibration:
+
+    rescale_MET_config:
+    2016_PreVFP:
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    2016_PostVFP:
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    "2017":
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    "2018": 
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    2022_preEE:   
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    2022_postEE:
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    2023_preBPix:
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    2023_postBPix:
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"
+    "2024":
+      apply: True
+      MET_collection: "MET"
+      Jet_collection: "Jet"

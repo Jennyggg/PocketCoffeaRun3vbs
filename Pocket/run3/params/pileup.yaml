@@ -1,0 +1,4 @@
+pileupJSONfiles:
+    "2024":
+        file: /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/puWeights_2024.json.gz
+        name: Pileup

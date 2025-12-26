@@ -1,0 +1,20 @@
+event_flags:
+    "2022_postEE":
+    - "goodVertices"
+    - "globalSuperTightHalo2016Filter"
+    - "EcalDeadCellTriggerPrimitiveFilter"
+    - "BadPFMuonFilter"
+    - "BadPFMuonDzFilter"
+    - "hfNoisyHitsFilter"
+    - "eeBadScFilter"
+    #https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2 not recommend Flag_ecalBadCalibFilter for late 2022 and early 2023
+    # manual fix required for prompt-reco (current version v12), too lazy to add
+    # Both the flag and the manual fix are not required for re-reco
+    "2023_preBPix":
+    - "goodVertices"
+    - "globalSuperTightHalo2016Filter"
+    - "EcalDeadCellTriggerPrimitiveFilter"
+    - "BadPFMuonFilter"
+    - "BadPFMuonDzFilter"
+    - "hfNoisyHitsFilter"
+    - "eeBadScFilter"

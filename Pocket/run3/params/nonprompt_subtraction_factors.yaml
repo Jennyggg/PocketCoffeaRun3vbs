@@ -1,0 +1,27 @@
+factors:
+  DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8: -1.0
+  WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  SingleMuon: 1.0
+  Muon: 1.0
+  EGamma: 1.0
+ratio_pairs:
+  - numerator: "electron_tight_pt_eta"
+    denominator: "electron_loose_pt_eta"
+    output: "electron_pt_eta_fakerate"
+  - numerator: "muon_tight_pt_eta"
+    denominator: "muon_loose_pt_eta"
+    output: "muon_pt_eta_fakerate"
+  - numerator: "electron_tight_pt"
+    denominator: "electron_loose_pt"
+    output: "electron_pt_fakerate"
+  - numerator: "muon_tight_pt"
+    denominator: "muon_loose_pt"
+    output: "muon_pt_fakerate"
+  - numerator: "electron_tight_eta"
+    denominator: "electron_loose_eta"
+    output: "electron_eta_fakerate"
+  - numerator: "muon_tight_eta"
+    denominator: "muon_loose_eta"
+    output: "muon_eta_fakerate"

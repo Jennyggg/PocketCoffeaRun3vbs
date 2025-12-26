@@ -1,0 +1,5 @@
+lepton_scale_factors:
+  muon_sf:
+    JSONfiles:
+      '2024':
+        file: /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/muon_Z.json.gz
