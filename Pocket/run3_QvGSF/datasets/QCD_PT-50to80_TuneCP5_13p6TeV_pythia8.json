@@ -1,0 +1,42 @@
+{
+    "QCD_PT-50to80_2022_postEE": {
+        "metadata": {
+            "das_names": "['/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM']",
+            "sample": "QCD",
+            "year": "2022_postEE",
+            "isMC": "True",
+            "xsec": "15710000.0",
+            "nevents": "19734680",
+            "size": "17893372940"
+        },
+        "files": [
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/2550000/7c9cfaac-fd12-4813-b74c-0c3354f2da14.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/2560000/56dac169-149f-4674-9870-3bac58e16af6.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/2560000/88e1a224-c148-4941-89bb-0db3ebf55c73.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/2560000/b7659e81-088d-46aa-b826-2665ba42dc49.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/2560000/e52a87cf-6f03-4f09-a4f0-fb743a90c3ad.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/0464a830-2352-4b11-93c4-fb877739fe61.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/083b262d-0261-44f4-b7b0-64be46e1d931.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/11e6d1e1-a636-47e8-882e-54345b3be618.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/3539e72b-67e1-4f3b-9549-8f7594614b9a.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/35aa8b29-3f42-4926-a1e0-cd64cae7d3cf.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/427f75f4-c99c-43a4-a07a-92444437029a.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/4cff0b1e-b874-4923-bc7a-b9c5087fff78.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/516a8705-932a-4429-9e92-3de56ecdd544.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/534c7722-2c4b-48d7-bccf-280d7bb8b07b.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/55aa53e8-b8c3-4216-8055-eb0163b6a96f.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/5c95b74f-87e6-42c9-9454-cf8f041f12f5.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/6a421737-46b8-48c7-9f14-1f609536e693.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/7186cece-590d-475c-a6f0-c45b76b41d0f.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/87fca921-d4f8-4dde-8b41-1d9010eca738.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/98f29c2e-6527-482d-b6be-7d9070739529.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/99f689e8-69ff-456f-8e1b-965e85fc9638.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/a74be90d-f501-45ac-afa2-d912ab9f7394.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/aa172853-4d53-4abd-a266-32027b252752.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/b248a193-b2a9-466a-b877-898e16ebb4a1.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/d8eb5253-d439-4ff7-9f20-646d669edb6e.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/dfb81957-b47c-45d9-bfac-879f38c07834.root",
+            "root://cmsio2.rc.ufl.edu:1094//store/mc/Run3Summer22EENanoAODv12/QCD_PT-50to80_TuneCP5_13p6TeV_pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/60000/ebb4db60-207a-483f-80c4-dbadf9c2129b.root"
+        ]
+    }
+}

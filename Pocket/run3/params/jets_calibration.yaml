@@ -37,3 +37,8 @@ default_jets_calibration:
       apply: True
       MET_collection: "MET"
       Jet_collection: "Jet"
+jet_scale_factors:
+  jet_collection:
+    btag: JetGoodCentral
+    ctag: JetGoodCentral
+    puId: JetGoodCentral

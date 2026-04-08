@@ -1,10 +1,34 @@
-lumi: 
+lumi:
   picobarns:
     "2022_postEE":
       E: 5671.64
       F: 17610.21
       G: 3055.42306
       tot: 26337.27
+    # ZeroBias effective luminosity (HLT_ZeroBias_v7, 2022 postEE runs 359022-362760)
+    # Computed with: brilcalc lumi --normtag normtag_PHYSICS.json --begin 359022 --end 362760
+    #                --hltpath "HLT_ZeroBias_v*" -u /fb -c web
+    # Recorded: 0.000163336 /fb = 163.336 /pb
+    "2022_postEE_ZeroBias":
+      tot: 163.336
+    # PFJet40 effective luminosity (HLT_PFJet40_v*, 2022 postEE runs 359022-362760)
+    # Computed with: brilcalc lumi --normtag normtag_PHYSICS.json --begin 359022 --end 362760
+    #                --hltpath "HLT_PFJet40_v*" -u /pb -c web
+    # v22: 0.078549 /pb, v23: 0.220796 /pb  →  total recorded: 0.299344593 /pb
+    "2022_postEE_PFJet40":
+      tot: 0.299344593
+    # DiPFJetAve effective luminosities (2022 postEE, runs 359022-362760)
+    # Computed with: brilcalc lumi --normtag normtag_PHYSICS.json --begin 359022 --end 362760
+    #                --hltpath "HLT_DiPFJetAve{N}_v*" -u /pb -c web
+    "2022_postEE_DiPFJetAve40":  { tot: 0.232884136   }
+    "2022_postEE_DiPFJetAve60":  { tot: 0.502283081   }
+    "2022_postEE_DiPFJetAve80":  { tot: 1.777733525   }
+    "2022_postEE_DiPFJetAve140": { tot: 18.691568466  }
+    "2022_postEE_DiPFJetAve200": { tot: 79.643729403  }
+    "2022_postEE_DiPFJetAve260": { tot: 256.884745729 }
+    "2022_postEE_DiPFJetAve320": { tot: 684.768937084 }
+    "2022_postEE_DiPFJetAve400": { tot: 2053.998349420 }
+    "2022_postEE_DiPFJetAve500": { tot: 8215.530704931 }
     "2022_preEE":
       C: 4943.2
       D: 2922.3

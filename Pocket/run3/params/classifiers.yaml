@@ -1,0 +1,43 @@
+classifiers:
+  "2022_postEE":
+    boosted_mu:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_0_iter_115.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_1_iter_99.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_2_iter_131.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_3_iter_81.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_4_iter_130.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_5_iter_196.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_6_iter_128.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_7_iter_97.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_mu_8_iter_98.json
+    boosted_e:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_0_iter_130.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_1_iter_113.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_2_iter_165.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_3_iter_92.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_4_iter_113.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_5_iter_128.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_6_iter_126.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_7_iter_94.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_boosted_e_8_iter_86.json
+    resolved_mu:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_0_iter_138.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_1_iter_172.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_2_iter_184.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_3_iter_194.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_4_iter_196.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_5_iter_197.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_6_iter_130.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_7_iter_186.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_mu_8_iter_182.json
+
+    resolved_e:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_0_iter_177.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_1_iter_180.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_2_iter_121.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_3_iter_157.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_4_iter_211.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_5_iter_149.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_6_iter_112.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_7_iter_166.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/params/bdt_resolved_e_8_iter_166.json

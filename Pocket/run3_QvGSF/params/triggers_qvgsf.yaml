@@ -1,0 +1,30 @@
+# params/triggers_qvgsf.yaml
+# Triggers for QvG SF derivation
+# Z+jets region: double muon triggers
+# Dijet region: single jet triggers
+
+HLT_triggers:
+  "2022_postEE":
+    # Double muon for Z+jets
+    DoubleMuon:
+      - Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8
+      - Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8
+    # DiPFJetAve triggers for dijet (JetMET stream).
+    # Each is prescaled; effective lumis computed with brilcalc
+    # --hltpath "HLT_DiPFJetAve{N}_v*" (see params/lumi.yaml).
+    # Offline (pT_j0+pT_j1)/2 plateau cuts applied per trigger in categories.
+    JetMET:
+      - DiPFJetAve40
+      - DiPFJetAve60
+      - DiPFJetAve80
+      - DiPFJetAve140
+      - DiPFJetAve200
+      - DiPFJetAve260
+      - DiPFJetAve320
+      - DiPFJetAve400
+      - DiPFJetAve500
+    # ZeroBias stream: fires on every bunch crossing (prescaled).
+    # Luminosity must be computed separately with brilcalc --hltpath "HLT_ZeroBias_v*"
+    # Recorded lumi 2022 postEE: 163.336 pb^-1  (see params/lumi.yaml)
+    ZeroBias:
+      - ZeroBias

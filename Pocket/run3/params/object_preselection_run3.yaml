@@ -23,6 +23,6 @@ object_preselection:
     pt: 200
     jetId: 0
     eta: 2.4
-    msd: 60
+    msd: 40
 
   

@@ -1,0 +1,39 @@
+{
+    "QCD_PT-15to30_2022_postEE": {
+        "metadata": {
+            "das_names": "['/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv12-JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/NANOAODSIM']",
+            "sample": "QCD",
+            "year": "2022_postEE",
+            "isMC": "True",
+            "xsec": "1252678000.0",
+            "nevents": "3923000",
+            "size": "7954832569"
+        },
+        "files": [
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/03c56299-7c6d-4d1d-b665-d7d5608b070c.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/03ca52b2-dec0-4a69-93ed-283b6e289710.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/20ad681a-1e58-40d6-ada2-e10639acd384.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/2d73fb1b-cbed-4ac4-b051-2afcb98d311e.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/2f4350d3-6b3b-4042-b014-6ea765c239bc.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/3f347698-d02a-4626-8952-0c62ff0d0262.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/473b57ab-1ab4-4cb5-9b41-769223047afa.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/4d1e6b22-dda0-449e-b25e-493dab46a821.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/5a7a1d23-a640-4c28-a09c-0cbe95c1c25d.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/5b64b67a-a13a-400c-b10d-a6c804b110cf.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/6e4b3b74-6379-4cfc-af84-9992d627da62.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/72da34cc-c23f-4305-86ea-68d04d61c494.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/843165a8-66f7-4c7d-999b-866fe809c430.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/8876b6bf-0aac-4820-af76-91b2bf710aa1.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/92a2155d-bb87-457a-8cbb-317920dbd107.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/97e6d9aa-b481-47df-9d83-d8d021ef884f.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/a61b4dce-93d1-4a3f-99ed-0e8073c34856.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/b2a0171b-640d-462f-90a8-ed2f427c81af.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/d5f5110f-0fd3-48c5-896b-15ba9547a944.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/df5877da-8aa1-4717-8209-042ac65af710.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/e04c899b-dad3-447a-a54b-9472974815d3.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/e249f341-3be8-41b0-9123-dcdab3dc6139.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/e9b20226-abf1-43e5-a41c-1c2d862b6b5c.root",
+            "root://cms-xrd-global.cern.ch///store/mc/Run3Summer22EENanoAODv12/QCD_PT-15to30_TuneCP5_13p6TeV_pythia8/NANOAODSIM/JMENano12p5_132X_mcRun3_2022_realistic_postEE_v4_ext1-v2/60000/eb47e844-7d2e-4dcd-bc8a-390b6190e51c.root"
+        ]
+    }
+}

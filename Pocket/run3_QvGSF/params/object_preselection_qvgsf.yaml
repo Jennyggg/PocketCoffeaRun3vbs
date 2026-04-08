@@ -1,0 +1,15 @@
+# params/object_preselection_qvgsf.yaml
+# Loose jet preselection for QvG SF derivation
+# Jets selected here are then further filtered in the workflow
+
+object_preselection:
+  Muon:
+    pt: 26
+    eta: 2.4
+    iso: 0.15
+    id: tightId
+  Jet:
+    dr_lepton: 0.4
+    pt: 15
+    eta: 4.7
+    jetId: 6

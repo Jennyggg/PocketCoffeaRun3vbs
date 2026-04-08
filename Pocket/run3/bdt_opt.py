@@ -1,0 +1,904 @@
+#!/usr/bin/env python3
+import xgboost as xgb
+import pandas as pd
+import coffea.util
+import awkward as ak
+import argparse
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_auc_score, accuracy_score, roc_curve
+import mplhep as hep
+import os
+print(xgb.__version__)
+hep.style.use("CMS")
+from matplotlib.ticker import StrMethodFormatter
+scale_run3 = True
+if scale_run3:
+    scale_lumi = 196.4/26.337
+    lumi = 196.4
+else:
+    scale_lumi = 1
+    lumi = 26.337
+
+
+colors = {
+    "VBS_EWK": "#bd1f01",
+    "TT": "#832db6",
+    "SingleTop": "#F38AA5",
+    "W+0J": "#3f90da",
+    "W+1J": "#92dadd",
+    "W+2J": "#94a4a2",
+    "DY": "#ffa90e",
+    "QCD-VV": "#b9ac70",
+    "Other": "#a96b59"
+
+}
+
+process_groups = {
+    "VBS_EWK": [
+        "osWWunpolarized_Wptojj_Wmtolv_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "osWWunpolarized_Wptolv_Wmtojj_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "ssWWunpolarized_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WZunpolarized_Wmtolv_Ztojj_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WZunpolarized_Wptolv_Ztojj_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"
+        ],
+
+    "TT": [
+        "TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8"
+        ],
+    "SingleTop": [
+        "TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
+        "TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
+        "TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
+        "TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8"
+        ],
+    "W+0J":[
+        "WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"
+        ],
+    "W+1J":[
+        "WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"
+    ],
+    "W+2J":[
+        "WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"
+    ],
+    "DY": [
+        "DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"
+        ],
+    "QCD-VV": [
+        "WW_TuneCP5_13p6TeV_pythia8",
+        "WZ_TuneCP5_13p6TeV_pythia8",
+        "ZZ_TuneCP5_13p6TeV_pythia8",
+        "WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8"
+        ]
+}
+processes_parquet = [
+        "TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+        "TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "DYto2L-2Jets_MLL-50_PTLL-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WW_TuneCP5_13p6TeV_pythia8",
+        "WZ_TuneCP5_13p6TeV_pythia8",
+        "ZZ_TuneCP5_13p6TeV_pythia8",
+        "WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8",
+        "TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
+        "TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
+        "TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
+        "TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
+        "osWWunpolarized_Wptojj_Wmtolv_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "osWWunpolarized_Wptolv_Wmtojj_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "ssWWunpolarized_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WZunpolarized_Wmtolv_Ztojj_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+        "WZunpolarized_Wptolv_Ztojj_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"
+        ]
+#processes_coffea = ["DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8"]
+
+processes_coffea = []
+def load_process_category_from_parquet(parquet_dir,parquet_table_dir, category_name, process, year):
+    df = pd.read_parquet(f"{parquet_dir}/{category_name}/{process}_{year}.parquet")
+    df["process"] = process
+    df["year_tag"] = f"{process}_{year}"
+    df["category"] = category_name
+    file_table = coffea.util.load(f"{parquet_table_dir}/output_{process}_{year}.coffea")
+    table_weight = file_table['sum_genweights']
+    table_absweight_to_weight = {f"{process}_{year}": sum(df['weight'])/sum(abs(df['weight'])) if len(df['weight'])>0 else 0}
+    print(f"Processing {process} ({process}_{year}) from {parquet_dir}/{category_name}/{process}_{year}.parquet")
+    print("events",len(df['weight']), ", sum_genweights",table_weight[f"{process}_{year}"], ", absweight_to_weight",table_absweight_to_weight[f"{process}_{year}"])
+    return df,table_weight,table_absweight_to_weight
+
+def load_category_from_coffea(coffea_file, category_name):
+    #Load and combine all processes for a given category from a .coffea file
+    merged_file = coffea.util.load(coffea_file)
+    columns = merged_file["columns"]
+    gen_weight_normalization = merged_file["sum_genweights"]
+    table_absweight_to_weight = {}
+    all_dfs = []
+
+    for process_name, process_dict in columns.items():
+        if process_name not in processes_coffea: continue
+        for subkey, year_dict in process_dict.items():
+            if not isinstance(year_dict, dict):
+                continue
+            if category_name not in year_dict:
+                continue  # Skip missing categories
+            category_dict = year_dict[category_name]['nominal'] #toggle nominal key because of pocket coffea formatting grr
+            #print(category_dict)
+            print(f"Processing {process_name} ({subkey}) for category {category_name}")
+            data_dict = {}
+
+            for var, arr in category_dict.items(): #KEY to REMOVE NOMINAL LATER
+                # print(f"--- {var} ---")
+                val = getattr(arr, "value", arr)
+                # print("type:", type(val))
+                # print("shape:", getattr(val, "shape", None))
+
+                try:
+                    arr_np = np.asarray(val)
+
+                    # Ensure column vector (N,) not (N,1)
+                    if arr_np.ndim == 2 and arr_np.shape[1] == 1:
+                        arr_np = arr_np[:, 0]
+
+                    # Skip empty arrays
+                    if arr_np.size == 0:
+                        print(f"Skipping empty array for {var}")
+                        continue
+
+                    # Store flattened 1D array
+                    if "jet5" in var or "jet6" in var: continue
+                    data_dict[var] = arr_np
+
+                except Exception as e:
+                    print(f"Could not process {var}: {e}")
+                    continue
+
+            if not data_dict:
+                continue
+
+            # print({k: type(v) for k, v in data_dict.items()})
+            # print({k: v for k, v in data_dict.items()})
+            df = pd.DataFrame(data_dict)
+            df["process"] = process_name
+            df["year_tag"] = subkey
+            df["category"] = category_name
+            all_dfs.append(df)
+            table_absweight_to_weight[subkey] = sum(df['weight'])/sum(abs(df['weight'])) if len(df['weight'])>0 else 0
+            print("events ",len(data_dict['weight']),", sum_genweights",gen_weight_normalization[subkey], ", absweight_to_weight",table_absweight_to_weight[subkey])
+
+    if not all_dfs:
+        raise ValueError(f"No data found for category '{category_name}' in {coffea_file}")
+
+    df_all = pd.concat(all_dfs, ignore_index=True)
+    return df_all,gen_weight_normalization,table_absweight_to_weight
+
+def setup_dmatrix(input_df, norm_table,table_absweight_to_weight, label_column="process", weight_column="weight",test_size=0.2, val_size=0.2, random_state=43):
+    if isinstance(input_df, str):
+        if input_df.endswith(".csv"):
+            df = pd.read_csv(input_df)
+        elif input_df.endswith(".parquet"):
+            df = pd.read_parquet(input_df)
+        else:
+            raise ValueError("Input must be a CSV or Parquet file.")
+    else:
+        df = input_df.copy()
+
+    signal_group = "VBS_EWK"
+    df["label"] = df[label_column].apply(lambda x: 1 if str(x) in process_groups[signal_group] else 0) 
+   
+    # 2. Labels
+    labels = df["label"].to_numpy()
+    # 3. Event weights
+    if weight_column in df.columns:
+        print(df["year_tag"], " year and scaled correction ", norm_table)
+        df[weight_column] = df.apply( lambda row: abs(row[weight_column]) * table_absweight_to_weight.get(row["year_tag"],1.0) / norm_table.get(row["year_tag"], 1.0), axis=1 )
+        weights = df[weight_column].to_numpy()
+    else:
+        weights = None
+
+
+    # exclude_cols = [label_column, "year_tag", "category", weight_column, "label", "events_genWeight", "process",  'weight_variation_PileupWeightUp', 'weight_variation_PileupWeightDown', 'weight_variation_sf_mu_idUp', 'weight_variation_sf_mu_idDown', 'weight_variation_sf_mu_isoUp', 'weight_variation_sf_mu_isoDown', 'weight_variation_sf_ele_idUp', 'weight_variation_sf_ele_idDown', 'weight_variation_sf_ele_recoUp', 'weight_variation_sf_ele_recoDown', 'weight_variation_sf_L1prefiringUp', 'weight_variation_sf_L1prefiringDown', 'weight_variation_sf_mu_triggerUp', 'weight_variation_sf_mu_triggerDown', 'weight_variation_sf_jet_puIdUp', 'weight_variation_sf_jet_puIdDown', 'weight_variation_sf_partonshower_isrUp', 'weight_variation_sf_partonshower_isrDown', 'weight_variation_sf_partonshower_fsrUp', 'weight_variation_sf_partonshower_fsrDown']
+    exclude_cols = ["label", "year_tag", "category", "weight", "events_genWeight", "process", "w_had_jets_mass", "w_had_jets_N"] + \
+                   [c for c in df.columns if c.startswith("weight_variation")] + \
+                   [c for c in df.columns if c.startswith("vbsjets")] + \
+                   [c for c in df.columns if c.startswith("dphi")] + \
+                   [c for c in df.columns if c.startswith("deta") and "MET" in c] + \
+                   ["events_nJetGood", "events_nCentralJetsGood", "events_nFatJetGood"]
+                #    [c for c in df.columns if c.startswith("jet5")] + \
+                #    [c for c in df.columns if c.startswith("jet6")]
+    features = df.drop(columns=[c for c in exclude_cols if c in df.columns])
+    scale_to_full_run2 = 1/test_size * scale_lumi
+    if test_size == 1:
+        X_test = features
+        y_test = labels
+        w_test = weights
+        idx_test = df.index
+        X_train = None
+        y_train = None
+        w_train = None
+        idx_train = None
+        X_val = None
+        y_val = None
+        w_val = None
+        idx_val = None
+        dtrain = None
+        dval = None
+        dtest  = xgb.DMatrix(X_test,  label=y_test,  weight=scale_to_full_run2*abs(w_test))
+    else:
+        X_trainval, X_test, y_trainval, y_test, w_trainval, w_test, idx_trainval, idx_test = train_test_split(
+                features, labels, weights, df.index,
+                test_size=test_size, random_state=random_state, stratify=labels
+                )
+        # --- Split Train vs Val ---
+        val_fraction = val_size / (1 - test_size)
+        X_train, X_val, y_train, y_val, w_train, w_val, idx_train, idx_val = train_test_split(
+                X_trainval, y_trainval, w_trainval, idx_trainval,
+                test_size=val_fraction, random_state=random_state, stratify=y_trainval
+                )
+        # Create DMatrix objects
+        print("start loading training matrix")
+        dtrain = xgb.DMatrix(X_train, label=y_train, weight=scale_to_full_run2*abs(w_train))
+        print("start loading val matrix")
+        dval   = xgb.DMatrix(X_val,   label=y_val,   weight=scale_to_full_run2*abs(w_val))
+        print("test weights: ", w_test)
+        dtest  = xgb.DMatrix(X_test,  label=y_test,  weight=scale_to_full_run2*abs(w_test))
+        print(f"Train: {X_train.shape[0]} events, Val: {X_val.shape[0]} events, Test: {X_test.shape[0]} events")
+        print(f"Number of features: {features.shape[1]}")
+    
+    if weights is not None:
+        print(f"Using per-event weights from column '{weight_column}'")
+    
+    sig_mask = (df["label"] == 1)
+    bkg_mask = (df["label"] == 0)
+
+
+    sum_sig = df.loc[sig_mask, "weight"].sum()
+    sum_bkg = df.loc[bkg_mask, "weight"].sum()
+    print("sum_sig",sum_sig)
+    print("sum_bkg",sum_bkg)
+    if sum_sig == 0 or sum_bkg == 0:
+        raise ValueError("Error: One of the classes has zero total weight!")
+
+    scale = sum_bkg / sum_sig
+    print(f"Scaled DF weights by {scale:.3f} to match background total for unitary.")
+    df_unit = df.copy()
+    df_unit.loc[sig_mask, "weight"] *= scale
+
+    return dtrain, dval, dtest, idx_train, idx_val, idx_test, df, df_unit
+
+def training_bdt(dtrain, dval, num_round = 10, channel='whad_withbveto_mu',outdir='bdt'):
+    params = {
+        "objective": "binary:logistic",
+        "eval_metric": "logloss",
+        "max_depth": 3,
+        "eta": 0.1,
+        "verbosity": 1
+    }
+    evals_result = {}
+    # num_round = 10
+    evallist = [(dtrain, 'train'), (dval, 'eval')]
+    bdt = xgb.train(params, dtrain, num_boost_round=num_round, evals=evallist, evals_result=evals_result, maximize=False, early_stopping_rounds=10)
+    
+    bdt_best = bdt[: bdt.best_iteration + 1]
+
+    # Save only the *best* model
+    model_path = f"{outdir}/bdt_{channel}_best_iter_{bdt.best_iteration}.json"
+    bdt_best.save_model(model_path)
+    print(f"Saved best model to {model_path}")
+
+    return bdt, evals_result
+
+
+def plot_training_curves(evals_result, outpath="bdt/training_curves.png"):
+    epochs = len(evals_result["train"]["logloss"])
+    x_axis = range(0, epochs)
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_axis, evals_result["train"]["logloss"], label="Train")
+    plt.plot(x_axis, evals_result["eval"]["logloss"], label="Validation")
+    plt.xlabel("iteration")
+    plt.ylabel("Log Loss")
+    plt.title("Training vs Validation Loss")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(outpath, dpi=300)
+    plt.close()
+    print(f"Saved training curve to {outpath}")
+
+def test_bdt(bdt, dtest, dtrain, channel, df_test,df_train, tag="",unitary=True,outdir = "bdt",test_size=0.2):
+    """
+    Evaluate trained BDT on a test set using the best iteration found during training.
+    """
+    # Use only trees up to the best iteration
+    #ypred = bdt.predict(dtest, iteration_range=(0, bdt.best_iteration + 1))
+    #ypred_training = bdt.predict(dtrain, iteration_range=(0, bdt.best_iteration + 1) )
+
+
+
+    ypred = bdt.predict(dtest)
+    ytrue = dtest.get_label()
+    auc = roc_auc_score(ytrue, ypred)
+    acc = accuracy_score(ytrue, ypred > 0.5)
+    fpr, tpr, _ = roc_curve(ytrue, ypred)
+    if dtrain is not None:
+        ypred_training = bdt.predict(dtrain)
+        ytrue_training = dtrain.get_label()
+        auc_t = roc_auc_score(ytrue_training, ypred_training)
+        acc_t = accuracy_score(ytrue_training, ypred_training > 0.5)
+        fpr_t, tpr_t, _ = roc_curve(ytrue_training, ypred_training)
+        df_plot_t = df_train.copy()
+        df_plot_t["bdt_score"] = ypred_training
+
+    print(f" Test AUC: {auc:.4f}")
+    print(f" Test Accuracy: {acc:.4f}")
+
+    plt.figure(figsize=(6, 6))
+    plt.plot(fpr, tpr, label=f"Test AUC = {auc:.3f}")
+    if dtrain is not None:
+        plt.plot(fpr_t, tpr_t, linestyle='--', label=f"Train AUC = {auc_t:.3f}")
+    plt.plot([0, 1], [0, 1], "k--")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    if dtrain is not None:
+        plt.title("Train vs Test ROC - BDT")
+    else:
+        plt.title("Test ROC - BDT")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(f"{outdir}/roc_curve_{channel}_"+tag+".png", dpi=300)
+    plt.close()
+    print("Saved ROC curve as 'roc_curve.png'")
+
+
+    df_plot = df_test.copy()
+    df_plot["bdt_score"] = ypred
+
+
+    def map_to_group(proc):
+        for group_name, members in process_groups.items():
+            if proc in members:
+                return group_name
+        return "Other"
+    
+
+    df_plot["group"] = df_plot["process"].apply(map_to_group)
+
+    ## EXTRA PLOTTING ##
+
+    df_test_eval = df_test.copy()
+    df_test_eval["bdt_score"] = ypred
+    df_test_eval["group"] = df_test_eval["process"].apply(map_to_group)
+
+
+    if dtrain is not None:
+        df_plot_t["group"] = df_plot_t["process"].apply(map_to_group)
+        df_train_eval = df_train.copy()
+        df_train_eval["bdt_score"] = ypred_training
+        df_train_eval["group"] = df_train_eval["process"].apply(map_to_group)
+
+    signal_group = "VBS_EWK"
+    background_groups = sorted(
+        g for g in df_test_eval["group"].unique()
+        if g != signal_group and g != "Other"
+    )
+
+    for bkg in background_groups:
+
+        # -------------------------
+        # TEST sample
+        # -------------------------
+        mask_test = df_test_eval["group"].isin([signal_group, bkg])
+
+        ytrue = (df_test_eval.loc[mask_test, "group"] == signal_group).astype(int).values
+        ypred = df_test_eval.loc[mask_test, "bdt_score"].values
+
+        if len(np.unique(ytrue)) < 2:
+            print(f"Skipping TEST {bkg}: only one class present")
+            continue
+
+        auc = roc_auc_score(ytrue, ypred)
+        acc = accuracy_score(ytrue, ypred > 0.5)
+
+        fpr, tpr, _ = roc_curve(ytrue, ypred)
+        # -------------------------
+        # Print results (same style)
+        # -------------------------
+        print(f"\n[{bkg}]")
+        print(f" Test AUC : {auc:.4f}")
+        print(f" Test Accuracy : {acc:.4f}")
+        if dtrain is not None:
+            # -------------------------
+            # TRAIN sample
+            # -------------------------
+            mask_train = df_train_eval["group"].isin([signal_group, bkg])
+            ytrue_training = (
+                    df_train_eval.loc[mask_train, "group"] == signal_group
+                    ).astype(int).values
+            ypred_training = df_train_eval.loc[mask_train, "bdt_score"].values
+            
+            if len(np.unique(ytrue_training)) < 2:
+                print(f"Skipping TRAIN {bkg}: only one class present")
+                continue
+            auc_t = roc_auc_score(ytrue_training, ypred_training)
+            acc_t = accuracy_score(ytrue_training, ypred_training > 0.5)
+            fpr_t, tpr_t, _ = roc_curve(ytrue_training, ypred_training)
+
+            print(f" Train AUC : {auc_t:.4f}")
+            print(f" Train Accuracy : {acc_t:.4f}")
+
+        # -------------------------
+        # Plot ROC
+        # -------------------------
+        plt.figure(figsize=(6, 6))
+        plt.plot(fpr, tpr, label=f"Test AUC = {auc:.3f}")
+        if dtrain is not None:
+            plt.plot(fpr_t, tpr_t, "--", label=f"Train AUC = {auc_t:.3f}")
+        plt.plot([0, 1], [0, 1], "k--")
+
+        plt.xlabel("False Positive Rate")
+        plt.ylabel("True Positive Rate")
+        plt.title(f"BDT: VBS_EWK vs {bkg}", fontsize=16)
+        plt.legend()
+        plt.grid(True)
+        plt.tight_layout()
+
+        outname = f"{outdir}/roc_VBS_EWK_vs_{bkg.replace('+','').replace('/','_')}_{channel}_{tag}.png"
+        plt.savefig(outname, dpi=300)
+        plt.close()
+
+        print(f"Saved ROC curve: {outname}")
+
+
+    groups = sorted(df_plot["group"].unique())
+    bins = np.linspace(0, 1, 40)
+    bin_centers = 0.5 * (bins[:-1] + bins[1:])
+    hist_data = {}
+    hist_data_t = {}
+    plt.figure(figsize=(8, 6))
+
+    stack_values = []
+    stack_labels = []
+    stack_colors = []
+    bottom = None  # to be filled after we compute first hist
+
+    # Optional colormap for unique colors
+    from matplotlib.cm import get_cmap
+    cmap = get_cmap("tab10")
+    scale_to_full_run2 = 1/test_size *scale_lumi
+    if unitary:
+        for i, group in enumerate(groups):
+            sub = df_plot[df_plot["group"] == group]
+            scale = 1 / np.sum(sub['weight'])
+            values, edges = np.histogram(sub["bdt_score"], bins=bins, weights=scale*sub["weight"])
+            w2, _ = np.histogram(sub["bdt_score"], bins=bins, weights=scale*sub["weight"]**2)
+            hist_data[group] = {
+                "yields": values,
+                "stat_unc": np.sqrt(w2), 
+                "edges": edges,
+                "centers": bin_centers,
+                "sumw": np.sum(sub["weight"])
+            }
+            if group == "Data":
+                plt.scatter(bin_centers, values, label=group, linewidth=1.8, marker='.',linestyle=None,color='black')
+            else:
+                plt.step(bin_centers, values, where='mid', label=group,color=colors[group], linewidth=1.8)
+    else:
+        stack_values, stack_labels, stack_colors = [], [], []
+        signal_value = None
+        signal_color = None
+        for i, group in enumerate(groups):
+            sub = df_plot[df_plot["group"] == group]
+            values, edges = np.histogram(sub["bdt_score"], bins=bins, weights=scale_to_full_run2*sub["weight"])
+            w2, _ = np.histogram(sub["bdt_score"], bins=bins, weights=(scale_to_full_run2*sub["weight"])**2)
+            hist_data[group] = {
+                "yields": values,
+                "stat_unc": np.sqrt(w2), 
+                "edges": edges,
+                "centers": bin_centers,
+                "sumw": scale_to_full_run2*np.sum(sub["weight"])
+            }
+            if group == "Data":
+                data_vals, data_err = values, hist_data[group]["stat_unc"]
+            elif group != signal_group:
+                stack_values.append(values)
+                stack_labels.append(group)
+                stack_colors.append(colors[group])
+            else:
+                signal_value = values
+                signal_color = colors[group]
+
+        if stack_values:
+            plt.hist(
+                [bin_centers] * len(stack_values),
+                bins=bins,
+                weights=stack_values,
+                stacked=True,
+                color=stack_colors,
+                label=stack_labels,
+                edgecolor="None",
+            )
+        if signal_group in groups:
+            plt.hist(
+                bin_centers,
+                bins=bins,
+                weights=signal_value*50,
+                stacked=False,
+                histtype="step",
+                color=signal_color,
+                label=signal_group+"*50",
+                edgecolor=signal_color,
+            )
+        if "data_vals" in locals():
+            plt.errorbar(
+                bin_centers,
+                data_vals,
+                yerr=data_err,
+                label="Data",
+                linewidth=1.8,
+                marker="o",
+                color="black",
+                linestyle="none",
+                zorder=10,
+            )
+    
+    scale_factor = 1
+    stack_values = []
+    stack_labels = []
+    stack_colors = []
+    bottom = None  # to be filled after we compute first hist
+    scale_to_full_run2 = 1/test_size * scale_lumi
+
+    if unitary and dtrain is not None:
+        groups_t = sorted(df_plot_t["group"].unique())
+        for i, group in enumerate(groups_t):
+            sub_t = df_plot_t[df_plot_t["group"] == group]
+            scale = scale_factor * 1 / np.sum(sub_t['weight'])
+            values_t, edges_t = np.histogram(sub_t["bdt_score"], bins=bins, weights=scale*sub_t["weight"])
+            w2_t, _ = np.histogram(sub_t["bdt_score"], bins=bins, weights=scale*sub_t["weight"]**2)
+            hist_data_t[group] = {
+                "yields": values_t,
+                "stat_unc": np.sqrt(w2_t), 
+                "edges": edges_t,
+                "centers": bin_centers,
+                "sumw": np.sum(sub_t["weight"])
+            }
+            if group == "Data":
+                plt.scatter(bin_centers, values_t, label=group, linewidth=1.8, marker='.',linestyle=None,color='black')
+            else:
+                plt.step(bin_centers, values_t, where='mid', label=group,color=colors[group], linewidth=1.8,linestyle='--')
+    #else:
+        # stack_values, stack_labels, stack_colors = [], [], []
+        # for i, group in enumerate(groups):
+        #     sub_t = df_plot_t[df_plot_t["group"] == group]
+        #     values_t, edges_t = np.histogram(sub_t["bdt_score"], bins=bins, weights=scale_to_full_run2*sub_t["weight"])
+        #     w2_t, _ = np.histogram(sub_t["bdt_score"], bins=bins, weights=scale_to_full_run2*sub_t["weight"]**2)
+        #     hist_data[group] = {
+        #         "yields": values_t,
+        #         "stat_unc": np.sqrt(w2_t), 
+        #         "edges": edges_t,
+        #         "centers": bin_centers,
+        #         "sumw": scale_to_full_run2*np.sum(sub_t["weight"])
+        #     }
+        #     if group == "Data":
+        #         data_vals, data_err = values_t, hist_data[group]["stat_unc"]
+        #     else:
+        #         stack_values.append(values_t)
+        #         stack_labels.append(group)
+        #         stack_colors.append(colors[i])
+        # if stack_values:
+        #     plt.hist(
+        #         [bin_centers] * len(stack_values),
+        #         bins=bins,
+        #         weights=stack_values,
+        #         stacked=True,
+        #         color=stack_colors,
+        #         label=stack_labels,
+        #         edgecolor="white",
+        #         alpha=0.6,
+        #     )
+        # if "data_vals" in locals():
+        #     plt.scatter(
+        #         bin_centers,
+        #         data_vals,
+        #         label="Data",
+        #         linewidth=1.8,
+        #         marker=".",
+        #         color="black",
+        #         zorder=10,
+        #         alpha=0.6
+        #     )
+        #plt.yscale('log')
+    hep.cms.label(
+        "Preliminary",
+        data=False,             
+        loc=0, 
+        fontsize=16,   # reduce from the very large default
+        lumi=lumi,       
+        com=13.6                  
+    )
+    plt.xlabel("BDT Discriminator Output",fontsize=14)
+    plt.ylabel("Yields",fontsize=14)
+    # plt.title(f"BDT Discriminator per Process ({channel}) - " + tag,fontsize=12)
+    plt.legend(fontsize=8)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    outpath = f"{outdir}/bdt_discriminator_{channel}_"+tag+".png"
+    plt.savefig(outpath, dpi=300)
+    plt.close()
+    print(f"Saved discriminator plot: {outpath}")
+
+    return auc, acc, hist_data
+def plot_feature_importance(bdt_best, outpath="bdt/feature_importance.png"):
+    ax = xgb.plot_importance(bdt_best, max_num_features=25, importance_type="gain",values_format='{v:.2f}')
+    # ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.2f}"))
+    fig = ax.figure
+    fig.tight_layout()
+    fig.savefig(outpath, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Saved feature importance plot to {outpath}")
+
+
+def print_signal_background_info(dmatrix, name="dataset"):
+    """Print number of signal and background events before BDT training."""
+    y = dmatrix.get_label()
+    w = dmatrix.get_weight()
+    if w is None or len(w) == 0:
+        w = [1.0] * len(y)
+
+    n_signal = sum(w[i] for i, label in enumerate(y) if label == 1)
+    n_bkg = sum(w[i] for i, label in enumerate(y) if label == 0)
+
+    print(f"{name}:")
+    print(f"   Total events: {len(y)}")
+    print(f"   Weighted signal events: {n_signal:.2f}")
+    print(f"   Weighted background events: {n_bkg:.2f}")
+    print(f"   Signal fraction: {n_signal / (n_signal + n_bkg):.3f}")
+
+
+def balance_signal_background_weights(dmatrix, balance_to="background"):
+
+    # Rescale signal or background weights so that
+    # sum(signal_weights) == sum(background_weights).
+
+
+    y = dmatrix.get_label()
+    w = dmatrix.get_weight()
+    if w is None or len(w) == 0:
+        w = np.ones_like(y)
+
+    sig_mask = y == 1
+    bkg_mask = y == 0
+
+    sum_sig = np.sum(w[sig_mask])
+    sum_bkg = np.sum(w[bkg_mask])
+
+    if sum_sig == 0 or sum_bkg == 0:
+        raise ValueError("Error: One of the classes has zero total weight!")
+
+    if balance_to == "background":
+        scale = sum_bkg / sum_sig
+        w[sig_mask] *= scale
+        print(f"Scaled signal weights by {scale:.3f} to match background total.")
+    elif balance_to == "signal":
+        scale = sum_sig / sum_bkg
+        w[bkg_mask] *= scale
+        print(f"Scaled background weights by {scale:.3f} to match signal total.")
+    else:
+        raise ValueError("balance_to must be either 'signal' or 'background'.")
+
+    dmatrix.set_weight(w)
+
+    print(f"After reweighting: sum(signal)={np.sum(w[sig_mask]):.3f}, sum(background)={np.sum(w[bkg_mask]):.3f}")
+    return dmatrix
+
+def calculate_signal_strength(full_dict, n_bins=0):
+    background = 0
+    bkg_unc = 0
+    signal = 0
+    sig_unc = 0
+    for i in full_dict:
+        events = np.sum(full_dict[i]['yields'][-n_bins:])
+        stat = np.sum(np.square(full_dict[i]['stat_unc'][-n_bins:]))
+        if "EWK" in i:
+            signal += events
+            sig_unc += stat
+            print("signal found! is ", i)
+        else:
+            background += events
+            bkg_unc += stat
+    dx = np.sqrt(sig_unc)
+    dy = np.sqrt(bkg_unc)
+    print("signal: ", signal)
+    print("background: ",background)
+    sig = signal/np.sqrt(background) 
+    unc = (dx ** 2 / np.sqrt(background) ** 2 + signal ** 2 * (1 / 2 / np.sqrt(background) ** 3) ** 2 * dy ** 2) ** (1 / 2)
+    return sig, unc
+
+def optimize_sig(group_of_samples,channel,n=39,outdir="bdt"):
+    strength=[]
+    unc = []
+    for i in range(n):
+        calculate, stat_err=calculate_signal_strength(group_of_samples, i)
+        print("S/sqrt(B) = ", calculate)
+        strength.append(calculate)
+        unc.append(stat_err)
+    max_idx = np.nanargmax(strength)
+    #print(group_of_samples)
+    discrim_score = np.flip(group_of_samples['TT']['centers'])
+    x_max = discrim_score[max_idx]
+    y_max = strength[max_idx]
+    #group_of_samples[][]
+
+    plt.figure(figsize=(7,5))
+    plt.errorbar(discrim_score, strength, yerr=unc, color='royalblue', marker='.', linestyle='None',ecolor='lightblue', label='Significance')
+    #plt.plot(discrim_score, strength, color='royalblue', alpha=0.5)
+    print(len(discrim_score))
+    # Highlight the maximum point
+    plt.axvline(x_max, color='red', linestyle='--', alpha=0.7)
+    plt.axhline(y_max, color='red', linestyle='--', alpha=0.7)
+    plt.scatter(x_max, y_max, color='darkred', s=80, zorder=5)
+
+    # Annotate the max point
+
+    plt.text(
+        x_max + 0.02, y_max,
+        f"max = ({x_max:.2f}, {y_max:.2f})",
+        color='darkred',
+        fontsize=10,
+        verticalalignment='bottom'
+    )
+
+    # Formatting
+    plt.xlim(0, 1)
+    try:
+        plt.ylim(0, 1.05 * max(strength))
+        plt.yticks(np.linspace(0, round(max(strength), 2), 6))
+    except:
+        plt.ylim(0,1)
+        plt.yticks(np.linspace(0, 1, 6))
+    plt.xlabel("BDT discrim score cut", fontsize=12)
+    plt.ylabel("Significance", fontsize=12)
+    plt.title(f"BDT variable optimization - {channel}", fontsize=14)
+    plt.grid(True, linestyle='--', alpha=0.4)
+
+    # Nice tick marks
+    plt.xticks(np.linspace(0, 1, 10))
+    plt.gca().xaxis.set_major_formatter(StrMethodFormatter('{x:.1f}'))
+
+    plt.tight_layout()
+    #plt.show()
+    plt.savefig(f"{outdir}/optimize_bdt_{channel}.png")
+def main():
+    parser = argparse.ArgumentParser(description="Convert specific category from .coffea to pandas DataFrame")
+    parser.add_argument("--coffea_file", help="Path to input .coffea file",default=None)
+    parser.add_argument("--category", help="Event category key (e.g. whad_withbveto_e)",default="resolved_mu")
+    parser.add_argument("--year", help="year",default="2022_postEE")
+    parser.add_argument("--parquet_dir", help="Path to parquet files", default=None)
+    parser.add_argument("--parquet_table_dir", help="Path to tables(sum of genweights) corresponding to the parquet files", default=None)
+    parser.add_argument("--out", help="Optional output parquet/csv file", default=None)
+    parser.add_argument("--outdir", help="output dir", default="bdt")
+    parser.add_argument('--evaluate-only', action='store_true', help='Enable feature')
+    parser.add_argument("--model", help="path of the json file for the model", default=None)
+    args = parser.parse_args()
+    os.makedirs(args.outdir, exist_ok=True)
+
+
+    df_list = []
+    norm = {}
+    factor_absweight_to_weight = {}
+    for process in processes_parquet:
+        df,norm_dict,table_absweight_to_weight = load_process_category_from_parquet(args.parquet_dir,args.parquet_table_dir, args.category, process, args.year)
+        df_list.append(df)
+        norm[f"{process}_{args.year}"] = norm_dict[f"{process}_{args.year}"]
+        factor_absweight_to_weight[f"{process}_{args.year}"] = table_absweight_to_weight[f"{process}_{args.year}"]
+
+    if 'processes_coffea' in locals() or 'processes_coffea' in globals() and processes_coffea is not None and len(processes_coffea)>0:
+        df_coffea, norm_coffea,factor_absweight_to_weight_coffea = load_category_from_coffea(args.coffea_file, args.category)
+        df=pd.concat([df_coffea]+df_list,ignore_index=True)
+        for process in processes_coffea:
+            if f"{process}_{args.year}" in norm_coffea.keys() and f"{process}_{args.year}" in factor_absweight_to_weight_coffea.keys():
+                norm[f"{process}_{args.year}"] = norm_coffea[f"{process}_{args.year}"]
+                factor_absweight_to_weight[f"{process}_{args.year}"] = factor_absweight_to_weight_coffea[f"{process}_{args.year}"]
+    else:
+        df=pd.concat(df_list,ignore_index=True)
+    print(f"Combined DataFrame shape: {df.shape}")
+    print(df.head())
+
+    if args.out:
+        if args.out.endswith(".parquet"):
+            df.to_parquet(args.out, index=False)
+        elif args.out.endswith(".csv"):
+            df.to_csv(args.out, index=False)
+        else:
+            raise ValueError("Output file must end with .csv or .parquet")
+        print(f"Saved DataFrame to {args.out}")
+
+
+
+    if args.evaluate_only and args.model is not None:
+        _,_,dtest,_, _, idx_test, df_fixed, df_unit = setup_dmatrix(args.out,norm,factor_absweight_to_weight, test_size=1.0, val_size=0.0, random_state=43)
+        model = xgb.XGBClassifier()
+        model.load_model(args.model)
+        bdt = model.get_booster()
+        dtrain_pure = None
+        dtrain = None
+        df_train_unit = None
+        df_train_xs = None
+    else:
+        dtrain,dval,dtest, idx_train, idx_val, idx_test, df_fixed, df_unit = setup_dmatrix(args.out,norm,factor_absweight_to_weight)
+        df_train_xs = df_fixed.loc[idx_train]
+        df_train_unit = df_unit.loc[idx_train]
+        print_signal_background_info(dtrain, "Training set")
+        print_signal_background_info(dval, "Validation set")
+        dtrain_pure= balance_signal_background_weights(dtrain)
+        dval_pure= balance_signal_background_weights(dval)
+        bdt, evals_result = training_bdt(dtrain_pure, dval_pure, num_round=1000, channel=args.category,outdir = args.outdir)
+        plot_training_curves(evals_result, outpath=f"{args.outdir}/training_curves_{args.category}.png")
+    df_test_xs = df_fixed.loc[idx_test]
+    df_test_unit = df_unit.loc[idx_test]
+    print_signal_background_info(dtest, "Test set")
+    dtest_pure= balance_signal_background_weights(dtest)
+    ### NORM TO 1
+    if args.evaluate_only and args.model is not None:
+        test_size=1
+    else:
+        test_size=0.2
+    auc1, acc1, hist_data1 = test_bdt(bdt, dtest_pure, dtrain_pure, args.category,df_test_unit, df_train_unit, tag="unitary", unitary=True,outdir = args.outdir,test_size=test_size)
+    ### NORM TO XSEC
+    auc2, acc2, hist_data2 = test_bdt(bdt, dtest, dtrain, args.category,df_test_xs, df_train_xs, tag="xsec", unitary=False, outdir = args.outdir,test_size=test_size)
+   
+    plot_feature_importance(bdt,outpath=f"{args.outdir}/feature_importance_{args.category}.png")
+    optimize_sig(hist_data2,args.category,outdir = args.outdir)
+
+if __name__ == "__main__":
+    main()

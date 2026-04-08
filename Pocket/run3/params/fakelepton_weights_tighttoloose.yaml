@@ -1,0 +1,20 @@
+fakeleptonweights:
+  "2022_postEE":
+    Muon:
+      file:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_fakes_3/lepton_weights.root
+      nominal:
+        - muon_pt_eta_weights_qcd_enriched_35_nominal
+      up:
+        - muon_pt_eta_weights_qcd_enriched_30_nominal
+      down:
+        - muon_pt_eta_weights_qcd_enriched_40_nominal
+    Electron:
+      file:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_fakes_3/lepton_weights.root
+      nominal:
+        - electron_pt_eta_weights_qcd_enriched_35_nominal
+      up:
+        - electron_pt_eta_weights_qcd_enriched_30_nominal
+      down:
+        - electron_pt_eta_weights_qcd_enriched_40_nominal

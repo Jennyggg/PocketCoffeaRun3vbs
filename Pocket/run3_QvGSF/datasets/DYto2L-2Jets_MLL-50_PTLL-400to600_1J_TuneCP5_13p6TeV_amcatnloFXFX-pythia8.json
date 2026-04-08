@@ -1,0 +1,53 @@
+{
+  "DYto2L-2Jets_MLL-50_PTLL-400to600_1J_2022_postEE": {
+    "metadata": {
+      "das_names": "['/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM', '/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6_ext1-v2/NANOAODSIM']",
+      "sample": "DYto2L-2Jets",
+      "year": "2022_postEE",
+      "isMC": "True",
+      "xsec": "1.413",
+      "nevents": "17034800",
+      "size": "39093525074"
+    },
+    "files": [
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/0549ae36-7c6a-46fc-bc0d-18e7913fbe85.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/10cc2688-98d3-4903-af0a-d7343cff334a.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/18d06c26-b660-44dc-93c2-555de4a66233.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/29abf047-5eb0-4d86-8163-fb560660bc14.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/2cf572e0-c069-472c-bf97-ef4cbc76f622.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/30cdb887-4602-4a15-ba65-f4eb4f14256d.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/31bf83cf-d1b8-46d1-84ba-19cfccfb832f.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/4014bc6f-3c6d-4f86-abdc-385b5779a26e.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/5cdaec30-b5da-401a-b68b-201332d3efd6.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/5d2355c8-08fd-4497-a932-25f7eefd446e.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/6682974d-8076-47e3-925d-c0abdd41e882.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/74ee310f-04fc-4b3f-aa84-d955253f0789.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/7f85c3d4-804e-4605-a855-9e8ab9ff5af4.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/874f90fb-cdee-45f2-840d-5beb405ef62d.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/c2f7a0e1-17b5-4ccd-81dd-bcded3561f04.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/c8c26ac5-a030-42eb-90ec-9ef88b04ab69.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/cde9b511-ffb9-4077-b058-ab503bbb7296.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/ce2f698a-2a78-44b4-b3e9-c410b59d4468.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/d88d3c3e-1945-4bf5-bbeb-670d5a727cef.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/f92d064a-5b0b-41e6-bac9-ce62e08b92a6.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/fa0294d7-9fe9-45c6-ace6-b9d22ce01815.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/fbed1930-1ecc-4b75-a669-1691f80daf66.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/fc2fc3ba-51bb-4d8a-a80d-03dfeee471c0.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/2550000/fe807297-133e-4c71-8a83-30941580414a.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/60000/a8c93e2e-bf6c-4aa7-927c-12e1dca288fd.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/60000/bfdeedfe-9fd6-4545-9144-e5fb7fe4bac4.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/70000/4099c99b-6f14-4c63-a745-d0b82ccc1b9e.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/70000/fa813c4c-2c2c-4140-861b-0b897576d504.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/0d3e18cd-8e72-4cc4-9a96-362fcfc6e5a7.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/44e0746d-17ee-4380-8998-6e3d9af7d309.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/4b6a45e1-757b-49f5-b301-4d83641a037f.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/52aa301c-4097-477a-9077-cd559bbb28ee.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/73e025a2-0911-4d65-a6b8-d4aa0a47f295.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/7f98dd34-5a6d-4abd-909d-01bf948de82e.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/a2c07244-1935-47c7-bc10-081b9395b8b5.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/bd08b96e-49f0-43ee-97c4-920a22aed828.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/c59c968f-7e4e-41ba-a5f9-e54c03a27ff8.root",
+      "root://dcache-cms-xrootd.desy.de:1094//store/mc/Run3Summer22EENanoAODv12/DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v1/80000/ebb4ae77-8c4d-4245-b7a8-3a7eb281f095.root"
+    ]
+  }
+}
