@@ -201,6 +201,23 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
         for d in ["Up", "Down"]
     ]
 
+    # Scale / PDF / parton-shower modifier names
+    _SCALE_MODIFIERS = (
+        # LHE renorm/fact scale: 2 variations × Up/Down = 4 modifiers
+        [f"LHEScaleWeight_{v}{d}"
+         for v in ["renorm_scale", "fact_scale"]
+         for d in ["Up", "Down"]]
+        +
+        # LHE PDF eigenvectors (pdf_1…pdf_100) + alpha_S: 101 variations × Up/Down = 202 modifiers
+        [f"LHEPdfWeight_{v}{d}"
+         for v in [f"pdf_{i}" for i in range(1, 101)] + ["alpha_S"]
+         for d in ["Up", "Down"]]
+        +
+        # Parton-shower ISR and FSR: 2 × Up/Down = 4 modifiers
+        [f"sf_partonshower_isr{d}" for d in ["Up", "Down"]]
+        + [f"sf_partonshower_fsr{d}" for d in ["Up", "Down"]]
+    )
+
     def __init__(self, cfg: Configurator):
         super().__init__(cfg)
         # sumw_noqvgcal: Σ(w_total × sf_qvg_central_inv × mask) per category.
@@ -215,6 +232,12 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
         self.output_format["sumw_qvg_variations"] = {
             mod: {cat: {} for cat in self._categories}
             for mod in self._QVG_MODIFIERS
+        }
+        # sumw_scale_variations: Σ(w_with_variation × mask) for LHEScaleWeight,
+        # LHEPdfWeight, and parton-shower ISR/FSR variations.
+        self.output_format["sumw_scale_variations"] = {
+            mod: {cat: {} for cat in self._categories}
+            for mod in self._SCALE_MODIFIERS
         }
 
     def fill_histograms_extra(self, variation):
@@ -259,6 +282,17 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
                  .setdefault(self._dataset, {})
                  .setdefault(self._sample, {}))["nominal"] = sumw_var
 
+            # sumw_scale_variations: weight with each LHEScale/LHEPdf/PS variation
+            for mod in self._SCALE_MODIFIERS:
+                try:
+                    w_var = self.weights_manager.get_weight(category, modifier=mod)
+                except (ValueError, KeyError):
+                    continue
+                sumw_var = float(ak.sum(w_var * mask_on_events))
+                (self.output["sumw_scale_variations"][mod][category]
+                 .setdefault(self._dataset, {})
+                 .setdefault(self._sample, {}))["nominal"] = sumw_var
+
     def postprocess(self, accumulator):
         """Extend base postprocess to rescale sumw_noqvgcal and sumw_qvg_variations
         by 1/sum_genweights, matching how sumw is rescaled, so that
@@ -293,6 +327,8 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
 
         _rescale_sumw_dict(accumulator["sumw_noqvgcal"])
         for mod_data in accumulator["sumw_qvg_variations"].values():
+            _rescale_sumw_dict(mod_data)
+        for mod_data in accumulator["sumw_scale_variations"].values():
             _rescale_sumw_dict(mod_data)
         return accumulator
 

@@ -564,14 +564,14 @@ cfg = Configurator(
     weights_classes=common_weights+[SF_ele_trigger, LHEScaleWeightWrapper, LHEPdfWeightWrapper, QvGSFWeight],#+[PileupWeight],
     #weights={"common": {"inclusive": ["genWeight", "lumi", "XS", "PileupWeight", "sf_mu_id", "sf_mu_iso", "sf_ele_id", "sf_ele
     #weights={"common": {"inclusive": ["genWeight", "lumi", "XS", "pileup", "sf_mu_id", "sf_mu_iso", "sf_ele_id", "sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","sf_btag_calib"]}},
-    #weights={"common": {"inclusive": ["genWeight", "lumi", "XS", "pileup", "sf_mu_id", "sf_mu_iso", "sf_ele_id", "sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr","sf_qvg"]}},
-    #variations={"weights": {"common": {"inclusive": ["pileup", "sf_mu_id","sf_mu_iso","sf_ele_id","sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr","sf_qvg"]}},
-    #           "shape": {"common": {"inclusive": ['jet_calibration', 'electron_scale_and_smearing', 'muons_scale_and_resolution']}}
-    #       },
-    weights={"common": {"inclusive": ["genWeight", "lumi", "XS", "pileup", "sf_mu_id", "sf_mu_iso", "sf_ele_id", "sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr"]}},
-    variations={"weights": {"common": {"inclusive": ["pileup", "sf_mu_id","sf_mu_iso","sf_ele_id","sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr"]}},
+    weights={"common": {"inclusive": ["genWeight", "lumi", "XS", "pileup", "sf_mu_id", "sf_mu_iso", "sf_ele_id", "sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr","sf_qvg"]}},
+    variations={"weights": {"common": {"inclusive": ["pileup", "sf_mu_id","sf_mu_iso","sf_ele_id","sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr","sf_qvg"]}},
                "shape": {"common": {"inclusive": ['jet_calibration', 'electron_scale_and_smearing', 'muons_scale_and_resolution']}}
-           }, 
+           },
+    #weights={"common": {"inclusive": ["genWeight", "lumi", "XS", "pileup", "sf_mu_id", "sf_mu_iso", "sf_ele_id", "sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr"]}},
+    #variations={"weights": {"common": {"inclusive": ["pileup", "sf_mu_id","sf_mu_iso","sf_ele_id","sf_ele_reco","sf_mu_trigger","sf_ele_trigger","sf_btag","LHEScaleWeight","LHEPdfWeight","sf_partonshower_isr","sf_partonshower_fsr"]}},
+    #           "shape": {"common": {"inclusive": ['jet_calibration', 'electron_scale_and_smearing', 'muons_scale_and_resolution']}}
+    #       }, 
     variables={
         # "psweight":     HistConf([Axis(coll="events", field="PSWeight", bins=30, start=-1.0, stop=12, label="PSWeight")]),
         # "lheweight":        HistConf([Axis(coll="events", field="LHEWeight", bins=30, start=-1.0, stop=12, label="LHEWeight")]),
@@ -774,5 +774,17 @@ cfg = Configurator(
         "bdt_resolved_mu":       HistConf([Axis(coll="events", field="bdt_resolved_mu", bins=40, start=0, stop=1, label="BDT mu resolved")]),
         "bdt_boosted_e":       HistConf([Axis(coll="events", field="bdt_boosted_e", bins=40, start=0, stop=1, label="BDT e boosted")]),
         "bdt_resolved_e":       HistConf([Axis(coll="events", field="bdt_resolved_e", bins=40, start=0, stop=1, label="BDT e resolved")]),
+        # ── Before QvG SF application ─────────────────────────────────────────
+        # extra_weight="sf_qvg_central_inv" multiplies the full event weight by
+        # 1/sf_qvg_central, effectively cancelling the sf_qvg weight.
+        # variations=False: sf_qvg variations are meaningless in the "no-SF" view.
+        "bdt_boosted_mu_noqvgcal":  HistConf([Axis(coll="events", field="bdt_boosted_mu",  bins=40, start=0, stop=1, label="BDT mu boosted (no QvG SF)")],  extra_weight="sf_qvg_central_inv", variations=False),
+        "bdt_resolved_mu_noqvgcal": HistConf([Axis(coll="events", field="bdt_resolved_mu", bins=40, start=0, stop=1, label="BDT mu resolved (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "bdt_boosted_e_noqvgcal":   HistConf([Axis(coll="events", field="bdt_boosted_e",   bins=40, start=0, stop=1, label="BDT e boosted (no QvG SF)")],   extra_weight="sf_qvg_central_inv", variations=False),
+        "bdt_resolved_e_noqvgcal":  HistConf([Axis(coll="events", field="bdt_resolved_e",  bins=40, start=0, stop=1, label="BDT e resolved (no QvG SF)")],  extra_weight="sf_qvg_central_inv", variations=False),
+        "w_had_jet1_resolved_PNetQvG_noqvgcal": HistConf([Axis(coll="events", field="w_had_jet1_resolved_PNetQvG", bins=40, start=0, stop=1.0, label=r"$ParticleNetQvG(W^{had.} j_1)$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "w_had_jet2_resolved_PNetQvG_noqvgcal": HistConf([Axis(coll="events", field="w_had_jet2_resolved_PNetQvG", bins=40, start=0, stop=1.0, label=r"$ParticleNetQvG(W^{had.} j_2)$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "PNetQvG_vbsjet1_noqvgcal": HistConf([Axis(coll="events", field="vbsjet1_PNetQvG", bins=50, start=0, stop=1, label=r"$ParticleNetQvG(j_1)^{VBS}$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "PNetQvG_vbsjet2_noqvgcal": HistConf([Axis(coll="events", field="vbsjet2_PNetQvG", bins=50, start=0, stop=1, label=r"$ParticleNetQvG(j_2)^{VBS}$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
     },
 )
