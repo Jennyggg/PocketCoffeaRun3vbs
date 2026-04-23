@@ -67,6 +67,15 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
     def __init__(self, cfg: Configurator):
         super().__init__(cfg)
 
+        self._classifiers = {}
+        if hasattr(self.params, 'classifiers'):
+            for region in ["boosted_mu", "boosted_e", "resolved_mu", "resolved_e"]:
+                self._classifiers[region] = []
+                for model_path in self.params.classifiers[self._year][region]:
+                    model = xgb.XGBClassifier()
+                    model.load_model(model_path)
+                    self._classifiers[region].append(model)
+
     # 1) object-level preselection
     def apply_object_preselection(self, variation):
         ev = self.events
@@ -630,13 +639,11 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
                 ev["dR",   f"{names[i]}_{names[j]}"] = dR
                 ev["mass", f"{names[i]}_{names[j]}"] = mass
 
-        if hasattr(self.params, 'classifiers'):
-            for region in ["boosted_mu","boosted_e","resolved_mu","resolved_e"]:
+        if self._classifiers:
+            for region, models in self._classifiers.items():
                 arrays_to_stack = []
                 y_pred = []
-                for imodel,model_path in enumerate(self.params.classifiers[self._year][region]):
-                    model = xgb.XGBClassifier()
-                    model.load_model(model_path)
+                for imodel, model in enumerate(models):
                     if imodel == 0:
                         features = model.get_booster().feature_names
                         for name in features:
@@ -660,7 +667,7 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
                             arrays_to_stack.append(ak.to_numpy(val))
                         X_test = np.column_stack(arrays_to_stack)
                     y_pred.append(model.get_booster().inplace_predict(X_test))
-                ev[f"bdt_{region}"] = np.mean(np.array(y_pred),axis=0)
+                ev[f"bdt_{region}"] = np.mean(np.array(y_pred), axis=0)
 
     def count_objects(self, variation):
         ev = self.events

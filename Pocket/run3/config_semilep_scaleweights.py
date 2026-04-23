@@ -157,19 +157,29 @@ class QvGSFWeight(WeightWrapper):
 
     def __init__(self, parameters, metadata):
         super().__init__(parameters, metadata)
-        self._variations = ["stat"]
+        self._variations = ["stat", "isr", "fsr", "jes", "jer", "pu"]
 
     def compute(self, events, size, shape_variation):
         if shape_variation == "nominal":
             return WeightDataMultiVariation(
                 name=self.name,
                 nominal=ak.to_numpy(events.sf_qvg_central),
-                variations=["stat"],
-                up=[ak.to_numpy(events.sf_qvg_stat_up)],
-                down=[ak.to_numpy(events.sf_qvg_stat_dn)],
+                variations=["stat", "isr", "fsr", "jes", "jer", "pu"],
+                up=[ak.to_numpy(events.sf_qvg_stat_up),
+                    ak.to_numpy(events.sf_qvg_isr_up),
+                    ak.to_numpy(events.sf_qvg_fsr_up),
+                    ak.to_numpy(events.sf_qvg_jes_up),
+                    ak.to_numpy(events.sf_qvg_jer_up),
+                    ak.to_numpy(events.sf_qvg_pu_up)],
+                down=[ak.to_numpy(events.sf_qvg_stat_dn),
+                      ak.to_numpy(events.sf_qvg_isr_dn),
+                      ak.to_numpy(events.sf_qvg_fsr_dn),
+                      ak.to_numpy(events.sf_qvg_jes_dn),
+                      ak.to_numpy(events.sf_qvg_jer_dn),
+                      ak.to_numpy(events.sf_qvg_pu_dn)],
             )
         else:
-            return WeightData(name=self.name, nominal=np.ones(size))
+            return WeightData(name=self.name, nominal=ak.to_numpy(events.sf_qvg_central))
 
 
 cloudpickle.register_pickle_by_value(workflow_evaluate_qvgcal)
@@ -710,7 +720,10 @@ cfg = Configurator(
         "fj_eta":   HistConf([Axis(coll="w_fatjet", field="eta", bins=48, start=-2.4, stop=2.4,   label=r"$\eta(J^{W})$")]),
         "fj_msd":   HistConf([Axis(coll="w_fatjet", field="msoftdrop", bins=40, start=0,   stop=200,   label=r"$m_{SD}(J^{W})$ [GeV]")]),
         "fj_t21":   HistConf([Axis(coll="w_fatjet", field="tau21", bins=32, start=0, stop=1.1,   label=r"$\tau_{21}$")]),
+        "fj_XqqVsQCD":   HistConf([Axis(coll="w_fatjet", field="particleNet_XqqVsQCD", bins=40, start=0, stop=1,   label=r"fatjet XqqVsQCD")]),
 
+        "fj_WvsQCD":   HistConf([Axis(coll="w_fatjet", field="particleNetWithMass_WvsQCD", bins=40, start=0, stop=1,   label=r"fatjet WvsQCD")]),
+        "fj_ZvsQCD":   HistConf([Axis(coll="w_fatjet", field="particleNetWithMass_ZvsQCD", bins=40, start=0, stop=1,   label=r"fatjet ZvsQCD")]),
         #"ak8_ak4_separation":       HistConf([Axis(coll="events", field="separation", bins=40, start=0.0, stop=4.0, label=r"$\Delta R(AK8 to AK4)$")]),
     
         "z_lep":   HistConf([Axis(coll="events", field="z_lep", bins=40, start=-1.0, stop=1.0, label=r"$Zepp. lepton$")]),

@@ -116,11 +116,15 @@ for y in parameters.fakeleptonweights.keys():
     ext = extractor()
     ext.add_weight_sets([
         f"muonFakeWeight {parameters.fakeleptonweights[y]['Muon']['nominal'][0]} {parameters.fakeleptonweights[y]['Muon']['file'][0]}",
-        f"muonFakeWeight_kin_up {parameters.fakeleptonweights[y]['Muon']['up'][0]} {parameters.fakeleptonweights[y]['Muon']['file'][0]}",
-        f"muonFakeWeight_kin_down {parameters.fakeleptonweights[y]['Muon']['down'][0]} {parameters.fakeleptonweights[y]['Muon']['file'][0]}",
+        f"muonFakeWeight_kin_up {parameters.fakeleptonweights[y]['Muon']['kin_up'][0]} {parameters.fakeleptonweights[y]['Muon']['file_kin_up'][0]}",
+        f"muonFakeWeight_kin_down {parameters.fakeleptonweights[y]['Muon']['kin_down'][0]} {parameters.fakeleptonweights[y]['Muon']['file_kin_down'][0]}",
+        f"muonFakeWeight_contamination_up {parameters.fakeleptonweights[y]['Muon']['contamination_up'][0]} {parameters.fakeleptonweights[y]['Muon']['file_contamination_up'][0]}",
+        f"muonFakeWeight_contamination_down {parameters.fakeleptonweights[y]['Muon']['contamination_down'][0]} {parameters.fakeleptonweights[y]['Muon']['file_contamination_down'][0]}",
         f"electronFakeWeight {parameters.fakeleptonweights[y]['Electron']['nominal'][0]} {parameters.fakeleptonweights[y]['Electron']['file'][0]}",
-        f"electronFakeWeight_kin_up {parameters.fakeleptonweights[y]['Electron']['up'][0]} {parameters.fakeleptonweights[y]['Electron']['file'][0]}",
-        f"electronFakeWeight_kin_down {parameters.fakeleptonweights[y]['Electron']['down'][0]} {parameters.fakeleptonweights[y]['Electron']['file'][0]}",
+        f"electronFakeWeight_kin_up {parameters.fakeleptonweights[y]['Electron']['kin_up'][0]} {parameters.fakeleptonweights[y]['Electron']['file_kin_up'][0]}",
+        f"electronFakeWeight_kin_down {parameters.fakeleptonweights[y]['Electron']['kin_down'][0]} {parameters.fakeleptonweights[y]['Electron']['file_kin_down'][0]}",
+        f"electronFakeWeight_contamination_up {parameters.fakeleptonweights[y]['Electron']['contamination_up'][0]} {parameters.fakeleptonweights[y]['Electron']['file_contamination_up'][0]}",
+        f"electronFakeWeight_contamination_down {parameters.fakeleptonweights[y]['Electron']['contamination_down'][0]} {parameters.fakeleptonweights[y]['Electron']['file_contamination_down'][0]}",
         ])
     ext.finalize()
     ev = ext.make_evaluator()
@@ -128,16 +132,16 @@ for y in parameters.fakeleptonweights.keys():
         "nominal": ev[f"muonFakeWeight"],
         "kin_up": ev[f"muonFakeWeight_kin_up"],
         "kin_down": ev[f"muonFakeWeight_kin_down"],
-        "contamination_up": ev[f"muonFakeWeight"]*0.8/(1+0.2*ev[f"muonFakeWeight"]),
-        "contamination_down": ev[f"muonFakeWeight"]*1.2/(1-0.2*ev[f"muonFakeWeight"]),
+        "contamination_up": ev[f"muonFakeWeight_contamination_up"],
+        "contamination_down": ev[f"muonFakeWeight_contamination_down"],
         
     }
     fake_electron_weights[y] = {
         "nominal": ev[f"electronFakeWeight"],
-        "kin_up": ev[f"electronFakeWeight_up"],
-        "kin_down": ev[f"electronFakeWeight_down"],
-        "contamination_up": ev[f"electronFakeWeight"]*0.8/(1+0.2*ev[f"electronFakeWeight"]),
-        "contamination_down": ev[f"electronFakeWeight"]*1.2/(1-0.2*ev[f"electronFakeWeight"]),
+        "kin_up": ev[f"electronFakeWeight_kin_up"],
+        "kin_down": ev[f"electronFakeWeight_kin_down"],
+        "contamination_up": ev[f"electronFakeWeight_contamination_up"],
+        "contamination_down": ev[f"electronFakeWeight_contamination_down"],
     }
 
 
@@ -187,7 +191,7 @@ class MuonGoodLeadWeight(WeightWrapper):
                     contamination_down],
             )
         else:
-            return WeightData(name=self.name, nominal=np.ones(size))
+            return WeightData(name=self.name, nominal=nominal)
 
 
 class ElectronGoodLeadWeight(WeightWrapper):
@@ -197,7 +201,7 @@ class ElectronGoodLeadWeight(WeightWrapper):
     def __init__(self, parameters, metadata):
         super().__init__(parameters, metadata)
         self._variations = ["kin", "contamination"]
-    def compute(self, events,*args, **kwargs):
+    def compute(self, events, size, shape_variation):
         year = events.metadata["year"]
         ele = events.ElectronGoodLead
         has_ele = ~ak.is_none(ele)
@@ -208,21 +212,31 @@ class ElectronGoodLeadWeight(WeightWrapper):
         eta = ak.where(has_ele, np.clip(eta, -2.4, 2.4), eta)
         nominal = fake_electron_weights[year]["nominal"](pt, eta)
         nominal = ak.where(has_ele, nominal, 1.0)
-        up      = fake_electron_weights[year]["up"](pt, eta)
-        up      = ak.where(has_ele, up, 1.0)
-        up = ak.fill_none(up,1.0)
-        down    = fake_electron_weights[year]["down"](pt, eta)
-        down    = ak.where(has_ele, down, 1.0)
-        down = ak.fill_none(down,1.0)
-        print("nominal ",nominal)
-        print("up ",up)
-        print("down ",down)
-        return WeightData(
-                self.name,
-                nominal,
-                up,
-                down,
-                )
+        kin_up      = fake_electron_weights[year]["kin_up"](pt, eta)
+        kin_up      = ak.where(has_ele, kin_up, 1.0)
+        kin_up = ak.fill_none(kin_up,1.0)
+        kin_down    = fake_electron_weights[year]["kin_down"](pt, eta)
+        kin_down    = ak.where(has_ele, kin_down, 1.0)
+        kin_down = ak.fill_none(kin_down,1.0)
+        contamination_up      = fake_electron_weights[year]["contamination_up"](pt, eta)
+        contamination_up      = ak.where(has_ele, contamination_up, 1.0)
+        contamination_up = ak.fill_none(contamination_up,1.0)
+        contamination_down    = fake_electron_weights[year]["contamination_down"](pt, eta)
+        contamination_down    = ak.where(has_ele, contamination_down, 1.0)
+        contamination_down = ak.fill_none(contamination_down,1.0)
+
+        if shape_variation == "nominal":
+            return WeightDataMultiVariation(
+                name=self.name,
+                nominal=nominal,
+                variations=["kin", "contamination"],
+                up=[kin_up,
+                    contamination_up],
+                down=[kin_down,
+                    contamination_down],
+            )
+        else:
+            return WeightData(name=self.name, nominal=nominal)
 
 
 cfg = Configurator(
@@ -483,12 +497,12 @@ cfg = Configurator(
 
 
 
-            #"DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
@@ -510,19 +524,19 @@ cfg = Configurator(
             #"DYto2L-2Jets_MLL-50_PTLL-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"DYto2L-2Jets_MLL-50_PTLL-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"TT_TuneCP5_13p6TeV_powheg-pythia8",
             "TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
-            #"TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
-            #"TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
-            #"TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
-            #"TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
-            #"TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
-            #"WZ_TuneCP5_13p6TeV_pythia8",
-            #"WW_TuneCP5_13p6TeV_pythia8",
-            #"ZZ_TuneCP5_13p6TeV_pythia8",
-            #"WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8",
+            "TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+            "TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
+            "TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8",
+            "TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
+            "TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8",
+            "WZ_TuneCP5_13p6TeV_pythia8",
+            "WW_TuneCP5_13p6TeV_pythia8",
+            "ZZ_TuneCP5_13p6TeV_pythia8",
+            "WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8",
             # #######
             # # RUN 3 SIGNAL
             # #######
@@ -733,6 +747,11 @@ cfg = Configurator(
         "fj_eta":   HistConf([Axis(coll="w_fatjet", field="eta", bins=48, start=-2.4, stop=2.4,   label=r"$\eta(J^{W})$")]),
         "fj_msd":   HistConf([Axis(coll="w_fatjet", field="msoftdrop", bins=40, start=0,   stop=200,   label=r"$m_{SD}(J^{W})$ [GeV]")]),
         "fj_t21":   HistConf([Axis(coll="w_fatjet", field="tau21", bins=32, start=0, stop=1.1,   label=r"$\tau_{21}$")]),
+
+        "fj_XqqVsQCD":   HistConf([Axis(coll="w_fatjet", field="particleNet_XqqVsQCD", bins=40, start=0, stop=1,   label=r"fatjet XqqVsQCD")]),
+
+        "fj_WvsQCD":   HistConf([Axis(coll="w_fatjet", field="particleNetWithMass_WvsQCD", bins=40, start=0, stop=1,   label=r"fatjet WvsQCD")]),
+        "fj_ZvsQCD":   HistConf([Axis(coll="w_fatjet", field="particleNetWithMass_ZvsQCD", bins=40, start=0, stop=1,   label=r"fatjet ZvsQCD")]),
 
         #"ak8_ak4_separation":       HistConf([Axis(coll="events", field="separation", bins=40, start=0.0, stop=4.0, label=r"$\Delta R(AK8 to AK4)$")]),
     

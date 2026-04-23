@@ -18,7 +18,6 @@ from workflow_evaluate_qvgcal import VBSSemileptonicProcessor
 from custom_cut_functions import (
     nLepton_skim_cut,
     nJet_skim_cut,
-    vbs_semileptonic_presel,
     vbs_semileptonic_w_pt_stitch_presel,
     whad_window_cut_e,
     met_skim_cut,
@@ -99,25 +98,37 @@ parameters = defaults.merge_parameters_from_files(
 #    )
 
 class QvGSFWeight(WeightWrapper):
-    """Per-event QvG scale factor: product of per-jet btagPNetQvG_SF."""
+    """Per-event QvG scale factor: product over leading 4 jets of btagPNetQvG_SF.
+    Variations: stat (correctionlib), isr, fsr, jes, jer, pu (from diag.npz).
+    """
     name = "sf_qvg"
     has_variations = True
 
     def __init__(self, parameters, metadata):
         super().__init__(parameters, metadata)
-        self._variations = ["stat"]
+        self._variations = ["stat", "isr", "fsr", "jes", "jer", "pu"]
 
     def compute(self, events, size, shape_variation):
         if shape_variation == "nominal":
             return WeightDataMultiVariation(
                 name=self.name,
                 nominal=ak.to_numpy(events.sf_qvg_central),
-                variations=["stat"],
-                up=[ak.to_numpy(events.sf_qvg_stat_up)],
-                down=[ak.to_numpy(events.sf_qvg_stat_dn)],
+                variations=["stat", "isr", "fsr", "jes", "jer", "pu"],
+                up=[ak.to_numpy(events.sf_qvg_stat_up),
+                    ak.to_numpy(events.sf_qvg_isr_up),
+                    ak.to_numpy(events.sf_qvg_fsr_up),
+                    ak.to_numpy(events.sf_qvg_jes_up),
+                    ak.to_numpy(events.sf_qvg_jer_up),
+                    ak.to_numpy(events.sf_qvg_pu_up)],
+                down=[ak.to_numpy(events.sf_qvg_stat_dn),
+                      ak.to_numpy(events.sf_qvg_isr_dn),
+                      ak.to_numpy(events.sf_qvg_fsr_dn),
+                      ak.to_numpy(events.sf_qvg_jes_dn),
+                      ak.to_numpy(events.sf_qvg_jer_dn),
+                      ak.to_numpy(events.sf_qvg_pu_dn)],
             )
         else:
-            return WeightData(name=self.name, nominal=np.ones(size))
+            return WeightData(name=self.name, nominal=ak.to_numpy(events.sf_qvg_central))
 
 cfg = Configurator(
     parameters=parameters,
@@ -383,8 +394,8 @@ cfg = Configurator(
 
 
             #"DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
-            #"DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
+            "DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             #"WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             "WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             "WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
@@ -691,5 +702,21 @@ cfg = Configurator(
         "bdt_resolved_mu":       HistConf([Axis(coll="events", field="bdt_resolved_mu", bins=40, start=0, stop=1, label="BDT mu resolved")]),
         "bdt_boosted_e":       HistConf([Axis(coll="events", field="bdt_boosted_e", bins=40, start=0, stop=1, label="BDT e boosted")]),
         "bdt_resolved_e":       HistConf([Axis(coll="events", field="bdt_resolved_e", bins=40, start=0, stop=1, label="BDT e resolved")]),
+        # ── Before QvG SF application ─────────────────────────────────────────
+        # extra_weight="sf_qvg_central_inv" multiplies the full event weight by
+        # 1/sf_qvg_central, effectively cancelling the sf_qvg weight.
+        # variations=False: sf_qvg variations are meaningless in the "no-SF" view.
+        "bdt_boosted_mu_noqvgcal":  HistConf([Axis(coll="events", field="bdt_boosted_mu",  bins=40, start=0, stop=1, label="BDT mu boosted (no QvG SF)")],  extra_weight="sf_qvg_central_inv", variations=False),
+        "bdt_resolved_mu_noqvgcal": HistConf([Axis(coll="events", field="bdt_resolved_mu", bins=40, start=0, stop=1, label="BDT mu resolved (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "bdt_boosted_e_noqvgcal":   HistConf([Axis(coll="events", field="bdt_boosted_e",   bins=40, start=0, stop=1, label="BDT e boosted (no QvG SF)")],   extra_weight="sf_qvg_central_inv", variations=False),
+        "bdt_resolved_e_noqvgcal":  HistConf([Axis(coll="events", field="bdt_resolved_e",  bins=40, start=0, stop=1, label="BDT e resolved (no QvG SF)")],  extra_weight="sf_qvg_central_inv", variations=False),
+        "w_had_jet1_resolved_PNetQvG_noqvgcal": HistConf([Axis(coll="events", field="w_had_jet1_resolved_PNetQvG", bins=40, start=0, stop=1.0, label=r"$ParticleNetQvG(W^{had.} j_1)$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "w_had_jet2_resolved_PNetQvG_noqvgcal": HistConf([Axis(coll="events", field="w_had_jet2_resolved_PNetQvG", bins=40, start=0, stop=1.0, label=r"$ParticleNetQvG(W^{had.} j_2)$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "PNetQvG_vbsjet1_noqvgcal": HistConf([Axis(coll="events", field="vbsjet1_PNetQvG", bins=50, start=0, stop=1, label=r"$ParticleNetQvG(j_1)^{VBS}$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        "PNetQvG_vbsjet2_noqvgcal": HistConf([Axis(coll="events", field="vbsjet2_PNetQvG", bins=50, start=0, stop=1, label=r"$ParticleNetQvG(j_2)^{VBS}$ (no QvG SF)")], extra_weight="sf_qvg_central_inv", variations=False),
+        # ── Note: renorm-QvG histograms are not needed here. ──────────────────
+        # The per-process renorm factor C = sumw_noqvgcal[cat] / sumw[cat] is
+        # saved in the coffea output and can be applied to any regular histogram
+        # in post-processing to restore the pre-SF yield while keeping the shape.
     },
 )
