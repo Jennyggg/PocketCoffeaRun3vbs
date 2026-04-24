@@ -67,14 +67,8 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
     def __init__(self, cfg: Configurator):
         super().__init__(cfg)
 
+        # Lazy cache: populated on first apply_object_preselection call for a given year.
         self._classifiers = {}
-        if hasattr(self.params, 'classifiers'):
-            for region in ["boosted_mu", "boosted_e", "resolved_mu", "resolved_e"]:
-                self._classifiers[region] = []
-                for model_path in self.params.classifiers[self._year][region]:
-                    model = xgb.XGBClassifier()
-                    model.load_model(model_path)
-                    self._classifiers[region].append(model)
 
     # 1) object-level preselection
     def apply_object_preselection(self, variation):
@@ -639,8 +633,17 @@ class VBSSemileptonicProcessor(BaseProcessorABC):
                 ev["dR",   f"{names[i]}_{names[j]}"] = dR
                 ev["mass", f"{names[i]}_{names[j]}"] = mass
 
-        if self._classifiers:
-            for region, models in self._classifiers.items():
+        if hasattr(self.params, 'classifiers') and self._year not in self._classifiers:
+            self._classifiers[self._year] = {}
+            for region in ["boosted_mu", "boosted_e", "resolved_mu", "resolved_e"]:
+                self._classifiers[self._year][region] = []
+                for model_path in self.params.classifiers[self._year][region]:
+                    model = xgb.XGBClassifier()
+                    model.load_model(model_path)
+                    self._classifiers[self._year][region].append(model)
+
+        if self._year in self._classifiers:
+            for region, models in self._classifiers[self._year].items():
                 arrays_to_stack = []
                 y_pred = []
                 for imodel, model in enumerate(models):
