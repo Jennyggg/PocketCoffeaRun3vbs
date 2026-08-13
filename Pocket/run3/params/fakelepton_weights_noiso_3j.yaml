@@ -2,19 +2,43 @@ fakeleptonweights:
   "2022_postEE":
     Muon:
       file:
-        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights.root
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_v1.root
+      file_kin_up:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_v1.root
+      file_kin_down:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_v1.root
+      file_contamination_up:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_contamination_up_v1.root
+      file_contamination_down:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_contamination_down_v1.root
       nominal:
         - muon_pt_eta_weights_qcd_enriched_35_deepmet_resolution_3j_nominal
-      up:
+      kin_up:
         - muon_pt_eta_weights_qcd_enriched_30_deepmet_resolution_3j_nominal
-      down:
+      kin_down:
         - muon_pt_eta_weights_qcd_enriched_40_deepmet_resolution_3j_nominal
+      contamination_up:
+        - muon_pt_eta_weights_qcd_enriched_35_deepmet_resolution_3j_nominal
+      contamination_down:
+        - muon_pt_eta_weights_qcd_enriched_35_deepmet_resolution_3j_nominal
     Electron:
       file:
-        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights.root
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_v1.root
+      file_kin_up:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_v1.root
+      file_kin_down:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_v1.root
+      file_contamination_up:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_contamination_up_v1.root
+      file_contamination_down:
+        - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/output_nonprompt_study_njet_met/lepton_weights_contamination_down_v1.root
       nominal:
         - electron_pt_eta_weights_qcd_enriched_35_deepmet_resolution_3j_nominal
-      up:
+      kin_up:
         - electron_pt_eta_weights_qcd_enriched_30_deepmet_resolution_3j_nominal
-      down:
+      kin_down:
         - electron_pt_eta_weights_qcd_enriched_40_deepmet_resolution_3j_nominal
+      contamination_up:
+        - electron_pt_eta_weights_qcd_enriched_35_deepmet_resolution_3j_nominal
+      contamination_down:
+        - electron_pt_eta_weights_qcd_enriched_35_deepmet_resolution_3j_nominal

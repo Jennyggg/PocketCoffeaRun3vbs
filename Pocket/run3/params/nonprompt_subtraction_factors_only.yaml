@@ -20,10 +20,18 @@ factors:
   TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -1.0
   TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -1.0
   TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -1.0
+  TBbartoLplusNuBbar-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  TbarBtoLminusNuB-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
   WW_TuneCP5_13p6TeV_pythia8: -1.0
   WZ_TuneCP5_13p6TeV_pythia8: -1.0
   ZZ_TuneCP5_13p6TeV_pythia8: -1.0
   WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  WWW_4F_TuneCP5_13p6TeV_amcatnlo-madspin-pythia8: -1.0
+  WZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  ZZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  WGtoLNuG-1Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  ZGto2LG-1Jets_ntgc_5f_TuneCP5_13p6TeV_madgraphMLM-pythia8: -1.0
+  VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8: -1.0
   WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
   WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
   WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
