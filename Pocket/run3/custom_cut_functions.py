@@ -22,6 +22,21 @@ def nJet_skim(events, params, **kwargs):
 
 nJet_skim_cut = Cut(name="nJet_skim", params={}, function=nJet_skim)
 
+def nLepton_eventskim(events, params, **kwargs):
+    good_muon = events.Muon[(events.Muon.pt > 26.0) & (np.abs(events.Muon.eta) < 2.4)]
+    good_elec = events.Electron[(events.Electron.pt > 35) & (np.abs(events.Electron.eta) < 2.4)]
+    return (ak.num(good_muon) + ak.num(good_elec) >= 1)
+
+nLepton_eventskim_cut = Cut(name="nLepton_eventskim", params={}, function=nLepton_eventskim)
+
+
+def nJet_eventskim(events, params, **kwargs):
+    good_jet = events.Jet[(events.Jet.pt > 30.0) & (np.abs(events.Jet.eta) < 4.7)]
+    good_fatjet = events.FatJet[(events.FatJet.pt > 200.0) & (np.abs(events.FatJet.eta) < 2.4)]
+    return (ak.num(good_jet) + ak.num(good_fatjet) >= 3)
+
+nJet_eventskim_cut = Cut(name="nJet_eventskim", params={}, function=nJet_eventskim)
+
 def met_skim(events, params, **kwargs):
     if params["met_def"] == "deepmet_response":
         met_cut = (events.DeepMETResponseTune.pt      >  30.0)
@@ -97,6 +112,53 @@ wjets_mu_sel = Cut(
     },
     function=select_wjets_mu,
 )
+
+def select_wjets_boosted(events, params, **kwargs):
+    one_lep = (events.nLeptonGood ==1)
+    one_boost_candidate = (events.nBoostCandidate == 1)
+    b_veto = (events.nBJetLoose == 0)
+    loose_lep_veto = (events.nLeptonVeto < 2)
+    if params["met_def"] == "deepmet_response":
+        met_cut = (events.DeepMETResponseTune.pt      >  params["met_pt"])
+    elif params["met_def"] == "deepmet_resolution":
+        met_cut = (events.DeepMETResolutionTune.pt      >  params["met_pt"])
+    else:
+        met_cut = (events.PuppiMET.pt      >  params["met_pt"])
+    mask = one_lep & one_boost_candidate & b_veto & loose_lep_veto & met_cut
+    return ak.values_astype(mask, np.bool_)
+
+wjets_boosted_sel = Cut(
+    name="wjet_boosted",
+    params={
+        "met_def": "deepmet_resolution",
+        "met_pt": 30.0,
+    },
+    function=select_wjets_boosted,
+)
+
+def select_zjets_boosted(events, params, **kwargs):
+    mask_2mu = (events.nMuonGood == 2) & (ak.sum(events.MuonGood.charge,axis=-1) == 0)
+    mask_2el = (events.nElectronGood == 2) & (ak.sum(events.ElectronGood.charge,axis=-1) == 0)
+    mupair = ak.combinations(events.MuonGood, 2, fields=["mu1", "mu2"])
+    mll_mu = ak.sum(ak.fill_none((mupair.mu1 + mupair.mu2).mass, np.nan),axis=1)
+    elpair = ak.combinations(events.ElectronGood, 2, fields=["el1", "el2"])
+    mll_e = ak.sum(ak.fill_none((elpair.el1 + elpair.el2).mass, np.nan),axis=1)
+    mupair_mass_window = (mll_mu > params["mll_low"]) & (mll_mu < params["mll_high"])
+    elpair_mass_window = (mll_e > params["mll_low"]) & (mll_e < params["mll_high"])
+    one_boost_candidate = (events.nBoostCandidate == 1)
+    mask = one_boost_candidate & ((mask_2mu & mupair_mass_window)  | ( mask_2el & elpair_mass_window ))
+    return ak.values_astype(mask, np.bool_)
+
+zjets_boosted_sel = Cut(
+    name="zjet_boosted",
+    params={
+        "mll_low": 60.0,
+        "mll_high": 120.0
+    },
+    function=select_zjets_boosted,
+)
+
+
 
 def select_zjets(events, params, **kwargs):
     mask_2mu = (events.nMuonGood == 2) & (ak.sum(events.MuonGood.charge,axis=-1) == 0)
@@ -256,6 +318,25 @@ TT_e_1bj_4j_2central_sel = Cut(
     function=select_TT_e,
 )
 
+
+def select_TT_boosted(events, params, **kwargs):
+    one_lep = (events.nLeptonGood ==1)
+    nbj = (events.nBJetTight >= params["nbjet"])
+    loose_lep_veto = (events.nLeptonVeto < 2)
+    one_boost_candidate = (events.nBoostCandidate == 1)
+    mask = one_lep & nbj & one_boost_candidate & loose_lep_veto
+    return ak.values_astype(mask, np.bool_)
+
+TT_boosted_sel = Cut(
+    name="TT_boosted",
+    params={
+        "nbjet": 2
+        },
+    function=select_TT_boosted,
+)
+
+
+
 # ---------- Preselection semileptonic VBS ----------
 def select_vbs_semileptonic(events, params, **kwargs):
     
@@ -276,7 +357,12 @@ def select_vbs_semileptonic(events, params, **kwargs):
     # wjj_pt = ak.fill_none(ak.firsts(getattr(events.w_had_jets, "pt", None)), np.nan)
     # wjj_pt_cut = np.where(np.isnan(wjj_pt),  False, wjj_pt  < params["wjj_pt"])
 
-    cut_mt_w = (events.mt_w_leptonic < 185.0)
+    if params["met_def"] == "deepmet_response":
+        cut_mt_w = (events.mt_w_leptonic_deepMET_responsetune < 185.0)
+    elif params["met_def"] == "deepmet_resolution":
+        cut_mt_w = (events.mt_w_leptonic_deepMET_resolutiontune < 185.0)
+    else:
+        cut_mt_w = (events.mt_w_leptonic < 185.0)
 
     # veto b optional
 
@@ -297,7 +383,12 @@ def select_vbs_semileptonic(events, params, **kwargs):
         w_pt_stitch = (events.gen_w_pt_by_pdg < 40)
     else:
         w_pt_stitch = True
-    mask = one_lep & met_cut & two_j & cut_mt_w & b_veto & w_pt_stitch#& ht_mask#&  loose_lep_veto #(lep.pt > 35.0) &
+    ## Photon PT stitching (WGtoLNuG-1Jets inclusive vs PTG-binned samples)
+    if params.get("apply_ptg_stitch", False):
+        ptg_stitch = (events.gen_photon_pt_by_pdg < 10)
+    else:
+        ptg_stitch = True
+    mask = one_lep & met_cut & two_j & cut_mt_w & b_veto & w_pt_stitch & ptg_stitch#& ht_mask#&  loose_lep_veto #(lep.pt > 35.0) &
     #mask = one_lep & met_cut & two_j & cut_mt_w & b_veto#& ht_mask#&  loose_lep_veto #(lep.pt > 35.0) &
     return ak.values_astype(mask, np.bool_)
 
@@ -308,7 +399,8 @@ vbs_semileptonic_presel = Cut(
         "apply_b_veto": False,
         "require_lep_central": True,
         "met_def": "deepmet_resolution",
-        "apply_w_pt_stitch": False
+        "apply_w_pt_stitch": False,
+        "apply_ptg_stitch": False
     },
     function=select_vbs_semileptonic,
 )
@@ -320,9 +412,62 @@ vbs_semileptonic_w_pt_stitch_presel = Cut(
         "apply_b_veto": False,
         "require_lep_central": True,
         "met_def": "deepmet_resolution",
-        "apply_w_pt_stitch": True
+        "apply_w_pt_stitch": True,
+        "apply_ptg_stitch": False
     },
     function=select_vbs_semileptonic,
+)
+
+vbs_semileptonic_ptg_stitch_presel = Cut(
+    name="vbs_semileptonic",
+    params={
+        "met_pt": 30.0,
+        "apply_b_veto": False,
+        "require_lep_central": True,
+        "met_def": "deepmet_resolution",
+        "apply_w_pt_stitch": False,
+        "apply_ptg_stitch": True
+    },
+    function=select_vbs_semileptonic,
+)
+
+
+# ---------- Preselection at gen level ----------
+
+def select_gen_vbs_semileptonic(events, params, **kwargs):
+    
+    one_lep = (events.nGenLeptonGood ==1)
+    
+    two_j  = (events.nGenJetGood    >= 2)
+
+    met_cut = (events.GenMET.pt      >  params["met_pt"])
+
+
+    cut_mt_w = (events.gen_mt_w_leptonic < 185.0)
+
+    # veto b optional
+
+    b_veto = (events.nGenBJet == 0) if params.get("apply_b_veto", True) else True
+
+    ## W PT stitching
+    if params.get("apply_w_pt_stitch", False):
+        w_pt_stitch = (events.gen_w_pt_by_pdg < 40)
+    else:
+        w_pt_stitch = True
+    mask = one_lep & met_cut & two_j & cut_mt_w & b_veto & w_pt_stitch#& ht_mask#&  loose_lep_veto #(lep.pt > 35.0) &
+    #mask = one_lep & met_cut & two_j & cut_mt_w & b_veto#& ht_mask#&  loose_lep_veto #(lep.pt > 35.0) &
+    return ak.values_astype(mask, np.bool_)
+
+vbs_gen_semileptonic_presel = Cut(
+    name="gen_vbs_semileptonic",
+    params={
+        "met_pt": 30.0,
+        "apply_b_veto": False,
+        "require_lep_central": True,
+        "met_def": "deepmet_resolution",
+        "apply_w_pt_stitch": False
+    },
+    function=select_gen_vbs_semileptonic,
 )
 
 ############################################
@@ -880,6 +1025,263 @@ qcd_validate_0j_mu = Cut(
     },
     function=select_QCD_validate_mu,
 )
+####################    Cutflow test    ####################
+
+
+
+def second_lepton_veto(events, params, **kwargs):
+    loose_lep_veto = (events.nLeptonVeto < 2)
+    return loose_lep_veto
+
+second_lepton_veto_cut = Cut(
+    name="second_lepton_veto",
+    params={},
+    function=second_lepton_veto,
+)
+
+def gen_second_lepton_veto(events, params, **kwargs):
+    loose_lep_veto = (events.nGenLeptonVeto < 2)
+    return loose_lep_veto
+
+gen_second_lepton_veto_cut = Cut(
+    name="gen_second_lepton_veto",
+    params={},
+    function=gen_second_lepton_veto,
+)
+
+
+
+def resolved_jet(events, params, **kwargs):
+    lep_ch = (events.nLeptonGood == 1)
+    four_j  = (events.nJetGood >= 4)
+    no_fat = (events.nFatJetCandidate == 0)
+    return lep_ch & four_j & no_fat
+
+resolved_jet_cut = Cut(
+    name="resolved_jet",
+    params={},
+    function=resolved_jet,
+)
+
+
+def gen_resolved_jet(events, params, **kwargs):
+    lep_ch = (events.nGenLeptonGood == 1)
+    four_j  = (events.nGenJetGood >= 4)
+    no_fat = (events.nGenFatJetCandidate == 0)
+    return lep_ch & four_j & no_fat
+
+gen_resolved_jet_cut = Cut(
+    name="gen_resolved_jet",
+    params={},
+    function=gen_resolved_jet,
+)
+
+def boosted_jet(events, params, **kwargs):
+    lep_ch = (events.nLeptonGood == 1)
+    fat = (events.nFatJetCandidate == 1)
+    return lep_ch & fat
+
+boosted_jet_cut = Cut(
+    name="boosted_jet",
+    params={},
+    function=boosted_jet,
+)
+
+def gen_boosted_jet(events, params, **kwargs):
+    lep_ch = (events.nGenLeptonGood == 1)
+    fat = (events.nGenFatJetCandidate == 1)
+    return lep_ch & fat
+
+gen_boosted_jet_cut = Cut(
+    name="gen_boosted_jet",
+    params={},
+    function=gen_boosted_jet,
+)
+
+def resolved_forward(events, params, **kwargs):
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
+
+    j1_pt_min = (j1.pt > 50)
+    j2_pt_min = (j2.pt > 30)
+
+    
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
+
+    cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
+    cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
+
+    return cut_mjj & cut_deta & j1_pt_min & j2_pt_min
+
+
+resolved_forward_cut = Cut(
+    name="resolved_forward",
+    params={"mjj_vbs": 500.0,
+            "delta_eta_vbs": 2.5},  
+    function=resolved_forward,
+)
+
+def gen_resolved_forward(events, params, **kwargs):
+    j1  = ak.firsts(getattr(events.gen_vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.gen_vbsjets, "jet2", None))
+
+    j1_pt_min = (j1.pt > 50)
+    j2_pt_min = (j2.pt > 30)
+
+    
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.gen_vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.gen_vbsjets, "delta_eta", None)), np.nan)
+
+    cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
+    cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
+
+    return cut_mjj & cut_deta & j1_pt_min & j2_pt_min
+
+
+gen_resolved_forward_cut = Cut(
+    name="gen_resolved_forward",
+    params={"mjj_vbs": 500.0,
+            "delta_eta_vbs": 2.5},  
+    function=gen_resolved_forward,
+)
+
+
+def boosted_forward(events, params, **kwargs):
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
+
+    j1_pt_min = (j1.pt > 50)
+    j2_pt_min = (j2.pt > 30)
+
+    
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
+
+    cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
+    cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
+
+    return cut_mjj & cut_deta & j1_pt_min & j2_pt_min
+
+
+boosted_forward_cut = Cut(
+    name="boosted_forward",
+    params={"mjj_vbs": 500.0,
+            "delta_eta_vbs": 2.5},  
+    function=boosted_forward,
+)
+
+def gen_boosted_forward(events, params, **kwargs):
+    j1  = ak.firsts(getattr(events.gen_vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.gen_vbsjets, "jet2", None))
+
+    j1_pt_min = (j1.pt > 50)
+    j2_pt_min = (j2.pt > 30)
+
+    
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.gen_vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.gen_vbsjets, "delta_eta", None)), np.nan)
+
+    cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
+    cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
+
+    return cut_mjj & cut_deta & j1_pt_min & j2_pt_min
+
+
+gen_boosted_forward_cut = Cut(
+    name="gen_boosted_forward",
+    params={"mjj_vbs": 500.0,
+            "delta_eta_vbs": 2.5},  
+    function=gen_boosted_forward,
+)
+
+def b_jet_veto(events, params, **kwargs):
+    b_veto = (events.nBJetLoose == 0)
+    return b_veto
+
+b_jet_veto_cut = Cut(
+    name="b_jet_veto",
+    params={},
+    function=b_jet_veto,
+)
+
+
+def gen_b_jet_veto(events, params, **kwargs):
+    gen_b_veto = (events.nGenBJet == 0)
+    return gen_b_veto 
+
+gen_b_jet_veto_cut = Cut(
+    name="gen_b_jet_veto",
+    params={},
+    function=gen_b_jet_veto,
+)
+
+
+
+def resolved_SR(events, params, **kwargs):
+    b_veto = (events.nBJetLoose == 0) 
+    wjj_pt = ak.fill_none(ak.firsts(getattr(events.w_had_jets, "pt", None)), np.nan)
+    wjj_pt_cut = np.where(np.isnan(wjj_pt),  False, wjj_pt  < 200.)
+    wmass = ak.fill_none(ak.firsts(getattr(events.w_had_jets, "mass", None)), np.nan)
+    within = np.where(np.isnan(wmass), False, np.abs(wmass - 85) < params["mjj_w_window"])
+
+    return b_veto & wjj_pt_cut & within
+
+resolved_SR_cut = Cut(
+    name="resolved_SR",
+    params={"mjj_w_window": 20.0},  
+    function=resolved_SR,
+)
+
+def boosted_SR(events, params, **kwargs):
+    b_veto = (events.nBJetLoose == 0) 
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_mass = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
+    pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
+    within = np.where(np.isnan(fj1_mass), False, np.abs(fj1_mass - 92.5) < params["mass_w_window"])
+    return b_veto & pt_cut & within
+
+boosted_SR_cut = Cut(
+    name="boosted_SR",
+    params={"mass_w_window": 22.5},  
+    function=boosted_SR,
+)
+
+
+def gen_resolved_SR(events, params, **kwargs):
+    b_veto = (events.nGenBJet == 0) 
+    wjj_pt = ak.fill_none(ak.firsts(getattr(events.gen_w_had_jets, "pt", None)), np.nan)
+    wjj_pt_cut = np.where(np.isnan(wjj_pt),  False, wjj_pt  < 200.)
+    wmass = ak.fill_none(ak.firsts(getattr(events.gen_w_had_jets, "mass", None)), np.nan)
+    within = np.where(np.isnan(wmass), False, np.abs(wmass - 85) < params["mjj_w_window"])
+
+    return b_veto & wjj_pt_cut & within
+
+gen_resolved_SR_cut = Cut(
+    name="gen_resolved_SR",
+    params={"mjj_w_window": 20.0},  
+    function=gen_resolved_SR,
+)
+
+def gen_boosted_SR(events, params, **kwargs):
+    b_veto = (events.nGenBJet == 0) 
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.gen_candidate_boost, "pt", None)), np.nan)
+    fj1_mass = ak.fill_none(ak.firsts(getattr(events.gen_candidate_boost, "mass", None)), np.nan)
+    pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
+    within = np.where(np.isnan(fj1_mass), False, np.abs(fj1_mass - 92.5) < params["mass_w_window"])
+    return b_veto & pt_cut & within
+
+gen_boosted_SR_cut = Cut(
+    name="gen_boosted_SR",
+    params={"mass_w_window": 22.5},  
+    function=gen_boosted_SR,
+)
+
+
+
+####################    SR, CR    ####################
+
+
 
 
 def in_whad_window_mu(events, params, **kwargs):
@@ -1042,24 +1444,24 @@ def in_msd_window_fatjet_bveto_mu(events, params, **kwargs):
     b_veto = (events.nBJetLoose == 0) 
     loose_lep_veto = (events.nLeptonVeto < 2)
     yes_fat = (events.nFatJetCandidate == 1)
-    fj1_pt = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "pt", None)), np.nan)
-    fj1_msd = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "msoftdrop", None)), np.nan)
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_msd = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
     pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
     within = np.where(np.isnan(fj1_msd), False, np.abs(fj1_msd - 92.5) < params["msd_w_window"])
     #sel = (np.isnan(fj1_msd)) & (fj1_msd > wlo) & (fj1_msd < whi)
-    lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
+    #lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
     # jet1_dR_cut = (events.vbs1_fj_dR > 0.8)
     # jet2_dR_cut = (events.vbs2_fj_dR > 0.8)
 
-    j1  = ak.firsts(getattr(events.vbsjets_boost, "jet1", None))
-    j2  = ak.firsts(getattr(events.vbsjets_boost, "jet2", None))
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
 
 
     j1_pt_min = (j1.pt > 50)
     j2_pt_min = (j2.pt > 30)
 
-    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "mass", None)), np.nan)
-    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "delta_eta", None)), np.nan)
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
 
     cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
     cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
@@ -1082,23 +1484,23 @@ def out_msd_window_fatjet_bveto_mu(events, params, **kwargs):
     b_veto = (events.nBJetLoose == 0) 
     loose_lep_veto = (events.nLeptonVeto < 2)
     yes_fat = (events.nFatJetCandidate == 1)
-    fj1_pt = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "pt", None)), np.nan)
-    fj1_msd = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "msoftdrop", None)), np.nan)
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_msd = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
     pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
     within = np.where(np.isnan(fj1_msd), False, np.abs(fj1_msd - 92.5) < params["msd_w_window"])
     #sel = (np.isnan(fj1_msd)) & (fj1_msd > wlo) & (fj1_msd < whi)
-    lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
+    #lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
     # jet1_dR_cut = (events.vbs1_fj_dR > 0.8)
     # jet2_dR_cut = (events.vbs2_fj_dR > 0.8)
 
-    j1  = ak.firsts(getattr(events.vbsjets_boost, "jet1", None))
-    j2  = ak.firsts(getattr(events.vbsjets_boost, "jet2", None))
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
 
     j1_pt_min = (j1.pt > 50)
     j2_pt_min = (j2.pt > 30)
 
-    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "mass", None)), np.nan)
-    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "delta_eta", None)), np.nan)
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
 
     cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
     cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
@@ -1122,25 +1524,25 @@ def in_msd_window_fatjet_baccept_mu(events, params, **kwargs):
     b_accept = (events.nBJetTight > 0) 
     loose_lep_veto = (events.nLeptonVeto < 2)
     yes_fat = (events.nFatJetCandidate == 1)
-    fj1_pt = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "pt", None)), np.nan)
-    fj1_msd = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "msoftdrop", None)), np.nan)
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_msd = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
     pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
     within = np.where(np.isnan(fj1_msd), False, np.abs(fj1_msd - 92.5) < params["msd_w_window"])
     #sel = (np.isnan(fj1_msd)) & (fj1_msd > wlo) & (fj1_msd < whi)
-    lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
+    #lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
     # jet1_dR_cut = (events.vbs1_fj_dR > 0.8)
     # jet2_dR_cut = (events.vbs2_fj_dR > 0.8)
 
-    j1  = ak.firsts(getattr(events.vbsjets_boost, "jet1", None))
-    j2  = ak.firsts(getattr(events.vbsjets_boost, "jet2", None))
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
 
     j1_pt_min = (j1.pt > 50)
     j2_pt_min = (j2.pt > 30)
 
     
 
-    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "mass", None)), np.nan)
-    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "delta_eta", None)), np.nan)
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
 
     cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
     cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
@@ -1309,23 +1711,23 @@ def in_msd_window_fatjet_bveto_e(events, params, **kwargs):
     b_veto = (events.nBJetLoose == 0) 
     loose_lep_veto = (events.nLeptonVeto < 2)
     yes_fat = (events.nFatJetCandidate == 1)
-    fj1_pt = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "pt", None)), np.nan)
-    fj1_msd = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "msoftdrop", None)), np.nan)
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_msd = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
     pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
     within = np.where(np.isnan(fj1_msd), False, np.abs(fj1_msd - 92.5) < params["msd_w_window"])
     #sel = (np.isnan(fj1_msd)) & (fj1_msd > wlo) & (fj1_msd < whi)
-    lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
+    #lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
     # jet1_dR_cut = (events.vbs1_fj_dR > 0.8)
     # jet2_dR_cut = (events.vbs2_fj_dR > 0.8)
 
-    j1  = ak.firsts(getattr(events.vbsjets_boost, "jet1", None))
-    j2  = ak.firsts(getattr(events.vbsjets_boost, "jet2", None))
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
 
     j1_pt_min = (j1.pt > 50)
     j2_pt_min = (j2.pt > 30)
 
-    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "mass", None)), np.nan)
-    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "delta_eta", None)), np.nan)
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
 
     cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
     cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
@@ -1349,23 +1751,23 @@ def out_msd_window_fatjet_bveto_e(events, params, **kwargs):
     b_veto = (events.nBJetLoose == 0) 
     loose_lep_veto = (events.nLeptonVeto < 2)
     yes_fat = (events.nFatJetCandidate == 1)
-    fj1_pt = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "pt", None)), np.nan)
-    fj1_msd = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "msoftdrop", None)), np.nan)
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_msd = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
     pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
     within = np.where(np.isnan(fj1_msd), False, np.abs(fj1_msd - 92.5) < params["msd_w_window"])
     #sel = (np.isnan(fj1_msd)) & (fj1_msd > wlo) & (fj1_msd < whi)
-    lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
+    #lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
     # jet1_dR_cut = (events.vbs1_fj_dR > 0.8)
     # jet2_dR_cut = (events.vbs2_fj_dR > 0.8)
 
-    j1  = ak.firsts(getattr(events.vbsjets_boost, "jet1", None))
-    j2  = ak.firsts(getattr(events.vbsjets_boost, "jet2", None))
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
 
     j1_pt_min = (j1.pt > 50)
     j2_pt_min = (j2.pt > 30)
 
-    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "mass", None)), np.nan)
-    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "delta_eta", None)), np.nan)
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
 
     cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
     cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
@@ -1389,24 +1791,24 @@ def in_msd_window_fatjet_baccept_e(events, params, **kwargs):
     b_accept = (events.nBJetTight > 0) 
     loose_lep_veto = (events.nLeptonVeto < 2)
     yes_fat = (events.nFatJetCandidate == 1)
-    fj1_pt = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "pt", None)), np.nan)
-    fj1_msd = ak.fill_none(ak.firsts(getattr(events.w_fatjet, "msoftdrop", None)), np.nan)
+    fj1_pt = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "pt", None)), np.nan)
+    fj1_msd = ak.fill_none(ak.firsts(getattr(events.candidate_boost, "msoftdrop", None)), np.nan)
     pt_cut = np.where(np.isnan(fj1_pt), False, fj1_pt > 200.)
     within = np.where(np.isnan(fj1_msd), False, np.abs(fj1_msd - 92.5) < params["msd_w_window"])
     #sel = (np.isnan(fj1_msd)) & (fj1_msd > wlo) & (fj1_msd < whi)
-    lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
+    #lead_lep_dR_cut = (events.lead_wlep_wfatjet1_dR > 0.8)
     # jet1_dR_cut = (events.vbs1_fj_dR > 0.8)
     # jet2_dR_cut = (events.vbs2_fj_dR > 0.8)
 
-    j1  = ak.firsts(getattr(events.vbsjets_boost, "jet1", None))
-    j2  = ak.firsts(getattr(events.vbsjets_boost, "jet2", None))
+    j1  = ak.firsts(getattr(events.vbsjets, "jet1", None))
+    j2  = ak.firsts(getattr(events.vbsjets, "jet2", None))
 
     j1_pt_min = (j1.pt > 50)
     j2_pt_min = (j2.pt > 30)
 
 
-    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "mass", None)), np.nan)
-    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets_boost, "delta_eta", None)), np.nan)
+    mjj_vbs   = ak.fill_none(ak.firsts(getattr(events.vbsjets, "mass", None)), np.nan)
+    deta_vbs  = ak.fill_none(ak.firsts(getattr(events.vbsjets, "delta_eta", None)), np.nan)
 
     cut_mjj   = np.where(np.isnan(mjj_vbs),  False, mjj_vbs  > params["mjj_vbs"])
     cut_deta  = np.where(np.isnan(deta_vbs), False, deta_vbs > params["delta_eta_vbs"])
@@ -1438,6 +1840,34 @@ def get_JetVetoMap_Mask(events, params, year, processor_params, sample, isMC, **
         & (jets.pt*(1-jets.muonSubtrFactor) > 15.) # May no be Muons misreconstructed as jets
         & ((jets["neEmEF"]+jets["chEmEF"])<0.9) # Energy fraction not dominated by ECal
     )
+    jets = jets[mask_for_VetoMap]
+    cset = correctionlib.CorrectionSet.from_file(
+        processor_params.jet_scale_factors.vetomaps[year]["file"]
+    )
+    corr = cset[processor_params.jet_scale_factors.vetomaps[year]["name"]]
+    etaFlat, phiFlat, etaCounts = ak.flatten(jets.eta), ak.flatten(jets.phi), ak.num(jets.eta)
+    phiFlat = np.clip(phiFlat, -3.14159, 3.14159) # Needed since no overflow included in phi binning
+    weight = ak.unflatten(
+        corr.evaluate("jetvetomap", etaFlat, phiFlat),
+        counts=etaCounts,
+    )
+    eventMask = ak.sum(weight, axis=-1)==0 # if at least one jet is vetoed, reject it event
+    return ak.where(ak.is_none(eventMask), False, eventMask)
+
+
+
+
+
+
+def get_GenJetVetoMap(name="GenJetVetoMaps"):
+    return Cut(
+        name=name, params={}, function=get_GenJetVetoMap_Mask
+    )
+
+def get_GenJetVetoMap_Mask(events, params, year, processor_params, sample, isMC, **kwargs):
+    if not isMC: return np.ones(len(events), dtype=bool)
+    jets = events.GenJet
+    mask_for_VetoMap = (abs(jets.eta) < 5.19) # Must be within HCal acceptance
     jets = jets[mask_for_VetoMap]
     cset = correctionlib.CorrectionSet.from_file(
         processor_params.jet_scale_factors.vetomaps[year]["file"]

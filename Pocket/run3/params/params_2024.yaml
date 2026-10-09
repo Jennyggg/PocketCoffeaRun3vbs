@@ -1,0 +1,80 @@
+# params/params_2024.yaml
+#
+# 2024 (Run3 Summer24, NanoAODv15) settings for the semileptonic VBS analysis.
+# Loaded AFTER the generic run3 files so that it wins on every 2024 key.
+#
+# Requires PocketCoffea >= the `update-upstream-2024` branch: the 2024 JER
+# (Summer24Prompt24_JRV2) uses the new ScaleFactor + SFUncertainty format,
+# which the old local jets.py evaluates without its uncertainty (JER up/down
+# would silently equal nominal).
+
+# Full 2024 golden lumi, PdmV numbers
+# https://twiki.cern.ch/twiki/bin/viewauth/CMS/PdmVRun3Analysis#DATA_AN1
+lumi:
+  picobarns:
+    "2024":
+      C: 7260
+      D: 7980
+      E: 11420
+      F: 28040
+      G: 38070
+      H: 5490
+      I: 11560
+      tot: 109950
+
+# Official 2024 MC->data pileup profile (eras B-I golden JSON).
+# NB: params/pileup.yaml points 2024 at the 2025 profile; do not load it for 2024.
+pileupJSONfiles:
+  "2024":
+    file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,LUM,puWeights_BCDEFGHI.json.gz,2026-04-15}
+    name: Collisions24_BCDEFGHI_goldenJSON
+
+# Lowest unprescaled single-lepton triggers in 2024.
+# Ele32_WPTight_Gsf (used in 2022) is still unprescaled, but the EGM 2024
+# trigger SFs are only provided for Ele30_WPTight_Gsf.
+HLT_triggers:
+  "2024":
+    Muon:
+      - IsoMu24
+    EGamma:
+      - Ele30_WPTight_Gsf
+
+# JERC: Summer24Prompt24 V5 JEC + Summer24Prompt24 JRV2 JER (replaces the
+# provisional V2 JEC + 2023 JER in the old local parameters).
+default_jets_calibration:
+  factory_config_clib:
+    AK4PFPuppi:
+      "2024":
+        json_path: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,JME,jet_jerc.json.gz,2026-07-16}
+        jec_mc: Summer24Prompt24_V5_MC
+        jec_data: Summer24Prompt24_V5_DATA
+        jer: Summer24Prompt24_JRV2_MC
+        level: L1L2L3Res
+    AK8PFPuppi:
+      "2024":
+        json_path: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,JME,fatJet_jerc.json.gz,2026-07-16}
+        jec_mc: Summer24Prompt24_V5_MC
+        jec_data: Summer24Prompt24_V5_DATA
+        jer: Summer24Prompt24_JRV2_MC
+        level: L1L2L3Res
+
+lepton_scale_factors:
+  electron_sf:
+    # The selection is cut-based Medium (Electron.cutBased >= 3), so take the
+    # matching HLT SF path rather than the MVAiso80 default.
+    trigger_sf:
+      "2024":
+        name: Electron-HLT-SF
+        file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,EGM,electronHlt.json.gz,2025-12-15}
+        path: HLT_SF_Ele30_MediumID
+  muon_sf:
+    # Official 2024 MUO SFs (replace the private params/muon_Z.json.gz).
+    JSONfiles:
+      "2024":
+        file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,MUO,muon_Z.json.gz,2026-06-18}
+    # MuonGood is tightId + pfRelIso04 < 0.15, i.e. the Tight PF isolation WP.
+    sf_name:
+      "2024":
+        id: NUM_TightID_DEN_TrackerMuons
+        iso: NUM_TightPFIso_DEN_TightID
+        trigger: NUM_IsoMu24_DEN_CutBasedIdTight_and_PFIsoTight

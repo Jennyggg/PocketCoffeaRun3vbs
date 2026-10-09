@@ -1,0 +1,5 @@
+# Use the full (regrouped) set of JES sources + JER instead of the default
+# JES_Total + JER. Structure is provided by PocketCoffea's
+# default_jets_calibration.variations.full_variations.
+jets_calibration:
+  variations: "${default_jets_calibration.variations.full_variations}"

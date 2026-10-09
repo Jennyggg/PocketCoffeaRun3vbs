@@ -1,0 +1,14 @@
+# ./make_joblist.sh 100 && voms-proxy-init -voms cms -valid 192:00 && condor_submit convert.sub
+executable            = convert_job.sh
+arguments             = $(folder) $(idxs)
+transfer_input_files  = edm2flat_cfg.py
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+x509userproxy         = /afs/cern.ch/user/j/jinw/private/x509up_u126712
+use_x509userproxy     = true
+output                = logs/$(folder)_$(ProcId).out
+error                 = logs/$(folder)_$(ProcId).err
+log                   = logs/convert.log
+request_memory        = 2000
++JobFlavour           = "longlunch"
+queue folder, idxs from joblist.txt
