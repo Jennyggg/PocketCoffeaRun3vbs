@@ -1,0 +1,11 @@
+# params/lepton_sf_2022.yaml
+#
+# MuonGood is tightId + pfRelIso04 < 0.15, i.e. the Tight PF isolation WP:
+# use the Tight-iso SF instead of the PocketCoffea default NUM_LoosePFIso_DEN_TightID.
+lepton_scale_factors:
+  muon_sf:
+    sf_name:
+      2022_postEE:
+        id: NUM_TightID_DEN_TrackerMuons
+        iso: NUM_TightPFIso_DEN_TightID
+        trigger: NUM_IsoMu24_DEN_CutBasedIdTight_and_PFIsoTight
