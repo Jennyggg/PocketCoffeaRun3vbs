@@ -17,7 +17,12 @@ object_preselection:
     pt: 35 #40
     eta: 2.4
     iso: 0.15
-    id: mvaIso_WP80
+    # NB: the actual electron selection in the workflows uses
+    # Electron.cutBased (cut-based ID, cumulative: 0=fail,1=veto,2=loose,
+    # 3=medium,4=tight), not the mva-based WPs -- cutBased_Medium matches
+    # the cutBased>=3 cut used for ElectronGood, so the sf_ele_id weight
+    # picks up the correct (cut-based Medium) EGM scale factor.
+    id: cutBased_Medium
   FatJet:
     dr_lepton: 0.8
     pt: 200

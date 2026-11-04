@@ -5,7 +5,7 @@
             "sample": "DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             "year": "2022_postEE",
             "isMC": "True",
-            "xsec": "43.2867",
+            "xsec": "476.4",
             "nevents": "163904854",
             "size": "244511148040"
         },
@@ -305,7 +305,7 @@
             "sample": "DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8",
             "year": "2022_preEE",
             "isMC": "True",
-            "xsec": "43.2867",
+            "xsec": "476.4",
             "nevents": "47125505",
             "size": "71729433229"
         },

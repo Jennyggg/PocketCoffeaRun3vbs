@@ -6,8 +6,8 @@
             "year": "2024",
             "isMC": "True",
             "xsec": "1171.5",
-            "nevents": "273917877",
-            "size": "605516180141"
+            "nevents": "273767910",
+            "size": "605184516965"
         },
         "files": [
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/00047372-0386-4062-945e-6709ca822b9f.root",
@@ -41,7 +41,6 @@
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/0def49f0-0cd3-4d5d-abc7-0d3f6dd5acf6.root",
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/0e0403dc-7f7b-46d9-a9a9-7c5184682db1.root",
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/0eb125e7-6571-4807-a15c-bee524f1dd49.root",
-            "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/0ecdb6a0-5fa7-4907-890c-65b10e2f4dca.root",
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/0ff78d4f-1ac2-407d-89f0-ab55a6d30ae6.root",
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/10d686db-c096-4fcf-8c33-0aa747968d75.root",
             "root://cms-xrd-global.cern.ch//store/mc/RunIII2024Summer24NanoAODv15/WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/120de6bf-dcef-4692-8b0e-2b91dbb3ced8.root",
