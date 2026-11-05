@@ -15,13 +15,15 @@ HLT_triggers:
       - IsoMu24
     EGamma:
       - Ele32_WPTight_Gsf
+  # Ele32_WPTight_Gsf is still unprescaled in 2024, but the EGM 2024 trigger
+  # SFs are only provided for Ele30_WPTight_Gsf.
   "2024":
     SingleMuon:
       - IsoMu24
     Muon:
       - IsoMu24
     EGamma:
-      - Ele32_WPTight_Gsf
+      - Ele30_WPTight_Gsf
   "2017":
     SingleEle:
       - Ele32_WPTight_Gsf

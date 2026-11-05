@@ -30,15 +30,7 @@ pileupJSONfiles:
     file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,LUM,puWeights_CDEFGHI.json.gz,2026-04-15}
     name: Collisions24_CDEFGHI_goldenJSON
 
-# Lowest unprescaled single-lepton triggers in 2024.
-# Ele32_WPTight_Gsf (used in 2022) is still unprescaled, but the EGM 2024
-# trigger SFs are only provided for Ele30_WPTight_Gsf.
-HLT_triggers:
-  "2024":
-    Muon:
-      - IsoMu24
-    EGamma:
-      - Ele30_WPTight_Gsf
+# The 2024 HLT paths (IsoMu24, Ele30_WPTight_Gsf) are set in triggers.yaml.
 
 # JERC: Summer24Prompt24 V5 JEC + Summer24Prompt24 JRV2 JER (replaces the
 # provisional V2 JEC + 2023 JER in the old local parameters).
