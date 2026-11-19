@@ -42,6 +42,9 @@ def met_skim(events, params, **kwargs):
         met_cut = (events.DeepMETResponseTune.pt      >  30.0)
     elif params["met_def"] == "deepmet_resolution":
         met_cut = (events.DeepMETResolutionTune.pt      >  30.0)
+    elif params["met_def"] == "deepmet_resolution_corr":
+        # xy offset + MC smearing, needs workflow_options["deepmet_corrections"] (2024)
+        met_cut = (events.DeepMETResolutionTuneCorr.pt  >  30.0)
     else:
         met_cut = (events.PuppiMET.pt      >  30.0)
     return met_cut
@@ -50,6 +53,13 @@ met_skim_cut = Cut(
         name="met_skim",
         params={
             "met_def": "deepmet_resolution",
+            },
+        function=met_skim)
+
+met_corr_skim_cut = Cut(
+        name="met_skim_corr",
+        params={
+            "met_def": "deepmet_resolution_corr",
             },
         function=met_skim)
 
@@ -374,6 +384,9 @@ def select_vbs_semileptonic(events, params, **kwargs):
         met_cut = (events.DeepMETResponseTune.pt      >  params["met_pt"])
     elif params["met_def"] == "deepmet_resolution":
         met_cut = (events.DeepMETResolutionTune.pt      >  params["met_pt"])
+    elif params["met_def"] == "deepmet_resolution_corr":
+        # xy offset + MC smearing, needs workflow_options["deepmet_corrections"] (2024)
+        met_cut = (events.DeepMETResolutionTuneCorr.pt  >  params["met_pt"])
     else:
         met_cut = (events.PuppiMET.pt      >  params["met_pt"])
 
@@ -387,6 +400,8 @@ def select_vbs_semileptonic(events, params, **kwargs):
         cut_mt_w = (events.mt_w_leptonic_deepMET_responsetune < 185.0)
     elif params["met_def"] == "deepmet_resolution":
         cut_mt_w = (events.mt_w_leptonic_deepMET_resolutiontune < 185.0)
+    elif params["met_def"] == "deepmet_resolution_corr":
+        cut_mt_w = (events.mt_w_leptonic_deepMET_resolutiontune_corr < 185.0)
     else:
         cut_mt_w = (events.mt_w_leptonic < 185.0)
 
@@ -502,6 +517,7 @@ vbs_gen_semileptonic_presel = Cut(
 
 def select_QCD_CR(events, params, **kwargs):
     one_lep = (events.nLeptonLoose >=1)
+    loose_lep_veto = (events.nLeptonVeto < 2)
     recoil_jet = (events.nJetGood_recoil >= 1) 
     recoil_jet_pt = (events.LeadJetGood_recoil.pt >= params["recoil_jet_pt"]) 
     cut_njet = (events.nJetGood >= params["njet"])
@@ -519,7 +535,7 @@ def select_QCD_CR(events, params, **kwargs):
     else:
         met_cut = (events.PuppiMET.pt      <  params["met_pt"])
         cut_mt_w = (events.mt_w_leptonic_loose < 30.0)
-    mask = one_lep & met_cut & recoil_jet & cut_mt_w & recoil_jet_pt & cut_njet
+    mask = one_lep & loose_lep_veto & met_cut & recoil_jet & cut_mt_w & recoil_jet_pt & cut_njet
     return ak.values_astype(mask, np.bool_)
 
 qcd_enriched_cut_35 = Cut(

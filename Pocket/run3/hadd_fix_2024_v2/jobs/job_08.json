@@ -1,0 +1,15 @@
+{
+ "dataset": "WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024",
+ "original_output": "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024_172.root",
+ "output": "root://eosuser.cern.ch//eos/cms/store/group/phys_smp/jinw/2024_skim_v2_hadd_fix/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024_172.root",
+ "nevents": 342803,
+ "inputs": [
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__33db1dfa-3a60-11f1-9d67-19e36880beef__0__157909.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__c552f5c8-3ad8-11f1-a6fc-11803c0abeef__0__152218.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__4a59186e-3ab2-11f1-bc1d-61d0b9bcbeef__0__153624.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__49e058e2-3a45-11f1-afe2-87cfb9bcbeef__0__181434.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__6e3a790e-3b51-11f1-8169-080a0c12beef__0__128709.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__51a97f08-3bbd-11f1-9b77-64a9935abeef__0__122404.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__dd507ac4-3a60-11f1-a87f-08bfe183beef__0__179050.root"
+ ]
+}

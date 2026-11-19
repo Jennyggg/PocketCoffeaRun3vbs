@@ -44,7 +44,7 @@ trigger_pd_overlap_cut = Cut(
 
 # W+jets reference selections with the MET cut on the corrected DeepMET resolution tune
 # (DeepMETResolutionTuneCorr: xy offset + MC smearing; needs workflow_options["deepmet_corrections"]).
-from custom_cut_functions import select_wjets, select_wjets_e, select_wjets_mu
+from custom_cut_functions import select_wjets, select_wjets_e, select_wjets_mu, select_vbs_semileptonic
 
 wjets_corrmet_sel = Cut(
     name="wjet_corrmet",
@@ -60,4 +60,29 @@ wjets_mu_corrmet_sel = Cut(
     name="wjet_mu_corrmet",
     params={"met_def": "deepmet_resolution_corr", "met_pt": 30.0},
     function=select_wjets_mu,
+)
+vbs_semileptonic_corrmet_presel = Cut(
+    name="vbs_semileptonic",
+    params={
+        "met_pt": 30.0,
+        "apply_b_veto": False,
+        "require_lep_central": True,
+        "met_def": "deepmet_resolution_corr",
+        "apply_w_pt_stitch": False,
+        "apply_ptg_stitch": False
+    },
+    function=select_vbs_semileptonic,
+)
+
+vbs_semileptonic_w_pt_corrmet_stitch_presel = Cut(
+    name="vbs_semileptonic",
+    params={
+        "met_pt": 30.0,
+        "apply_b_veto": False,
+        "require_lep_central": True,
+        "met_def": "deepmet_resolution_corr",
+        "apply_w_pt_stitch": True,
+        "apply_ptg_stitch": False
+    },
+    function=select_vbs_semileptonic,
 )

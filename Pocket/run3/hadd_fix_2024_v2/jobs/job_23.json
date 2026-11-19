@@ -1,0 +1,13 @@
+{
+ "dataset": "TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024",
+ "original_output": "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024_452.root",
+ "output": "root://eosuser.cern.ch//eos/cms/store/group/phys_smp/jinw/2024_skim_v2_hadd_fix/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024_452.root",
+ "nevents": 339183,
+ "inputs": [
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024__391e0a1e-1c81-11f0-809c-02e4b49dbeef__298485__596970.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024__4cc9f2bc-1ffb-11f0-b575-a2cfb9bcbeef__0__2948.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024__bd5650e2-1bfb-11f0-a3a2-64c59a83beef__0__221100.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024__bd5650e2-1bfb-11f0-a3a2-64c59a83beef__221100__442200.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8_2024__3707c3d4-1bb7-11f0-9b40-dc06c10abeef__0__221100.root"
+ ]
+}

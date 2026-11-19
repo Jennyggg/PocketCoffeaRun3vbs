@@ -17,7 +17,9 @@ object_preselection:
     pt: 35 #40
     eta: 2.4
     iso: 0.15
-    id: mvaIso_WP80
+    # Loose electron = cut-based Veto (Electron.cutBased >= 1), as for ElectronLoose
+    # in workflow_evaluate_2024; this key only selects the EGM ID SF ("Veto").
+    id: cutBased_Veto
   FatJet:
     dr_lepton: 0.8
     pt: 200

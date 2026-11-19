@@ -1,0 +1,15 @@
+{
+ "dataset": "VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024",
+ "original_output": "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024_59.root",
+ "output": "root://eosuser.cern.ch//eos/cms/store/group/phys_smp/jinw/2024_skim_v2_hadd_fix/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024_59.root",
+ "nevents": 338864,
+ "inputs": [
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__5c2b232e-2f65-11f0-a110-e7e65d9fbeef__0__271513.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__5c2b232e-2f65-11f0-a110-e7e65d9fbeef__271513__543025.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__7a346b94-23d2-11f0-93f1-a8e6b49dbeef__0__215712.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__01d0dacc-2790-11f0-a0fa-0e05010abeef__0__266270.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__01d0dacc-2790-11f0-a0fa-0e05010abeef__266270__532539.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__9f1292d2-27ac-11f0-9e94-1705010abeef__0__41195.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024/VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8_2024__a6ee4998-2e72-11f0-b8ef-72e75d9fbeef__0__293234.root"
+ ]
+}

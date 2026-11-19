@@ -1,0 +1,682 @@
+{
+  "schema_version": 2,
+  "corrections": [
+    {
+      "name": "fj_tau21_SF",
+      "version": 2,
+      "inputs": [
+        {
+          "name": "systematic",
+          "type": "string",
+          "description": "Variation key: nominal / stat_up / stat_down / pileup_up / pileup_down / sf_btag_up / sf_btag_down / sf_partonshower_isr_up / sf_partonshower_isr_down / sf_partonshower_fsr_up / sf_partonshower_fsr_down / JES_up / JES_down / JER_up / JER_down"
+        },
+        {
+          "name": "fjtype",
+          "type": "string",
+          "description": "matched or unmatched"
+        },
+        {
+          "name": "tau21",
+          "type": "real",
+          "description": "fatjet tau21; coarse bins [0, 0.45, 1.0]"
+        }
+      ],
+      "output": {
+        "name": "weight",
+        "type": "real",
+        "description": "Per-event tau21 scale factor weight"
+      },
+      "data": {
+        "nodetype": "category",
+        "input": "systematic",
+        "content": [
+          {
+            "key": "nominal",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9274855086726154,
+                      1.0505085080797083
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9229033367026087,
+                      1.1970855719139062
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "stat_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9376771866786127,
+                      1.0599911276351577
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.93528714369095,
+                      1.2297360747572048
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "stat_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9172938306666181,
+                      1.041025888524259
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9105195297142674,
+                      1.1644350690706076
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "pileup_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9283372778926642,
+                      1.0511906568884073
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9238389427975957,
+                      1.2002617843049643
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "pileup_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9266337394525666,
+                      1.0498263592710093
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9219677306076217,
+                      1.193909359522848
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "sf_btag_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9302077242992103,
+                      1.052697204041809
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9300099113870316,
+                      1.2215161409076734
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "sf_btag_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9247632930460205,
+                      1.0483198121176076
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9157967620181858,
+                      1.172655002920139
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "sf_partonshower_isr_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9276084096601258,
+                      1.05059086979522
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9263574499951266,
+                      1.2078177706882978
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "sf_partonshower_isr_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9273626076851049,
+                      1.0504261463641966
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9194492234100908,
+                      1.1863533731395146
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "sf_partonshower_fsr_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9838232141774969,
+                      1.0933444572194533
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9541724872431661,
+                      1.2901007530369255
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "sf_partonshower_fsr_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.8711478031677339,
+                      1.0076725589399633
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.8916341861620514,
+                      1.1040703907908869
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "JES_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9309421636533279,
+                      1.0532427556931672
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9243729509799841,
+                      1.2016760503451311
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "JES_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9240288536919028,
+                      1.0477742604662494
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9214337224252334,
+                      1.1924950934826812
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "JER_up",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9274982425808537,
+                      1.0505172080499476
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9230990172514839,
+                      1.1977462371964325
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "JER_down",
+            "value": {
+              "nodetype": "category",
+              "input": "fjtype",
+              "content": [
+                {
+                  "key": "unmatched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9274727747643771,
+                      1.050499808109469
+                    ],
+                    "flow": "clamp"
+                  }
+                },
+                {
+                  "key": "matched",
+                  "value": {
+                    "nodetype": "binning",
+                    "input": "tau21",
+                    "edges": [
+                      0.0,
+                      0.45,
+                      1.0
+                    ],
+                    "content": [
+                      0.9227076561537335,
+                      1.19642490663138
+                    ],
+                    "flow": "clamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+ "dataset": "WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024",
+ "original_output": "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024_3.root",
+ "output": "root://eosuser.cern.ch//eos/cms/store/group/phys_smp/jinw/2024_skim_v2_hadd_fix/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024_3.root",
+ "nevents": 387850,
+ "inputs": [
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__b37c8bc6-dec4-11f1-88cb-91a18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__d6575988-dec3-11f1-89b2-a0848e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__bf6c0e44-dec3-11f1-8720-04d18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__b92837b0-dec3-11f1-b191-2cd18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__a136ba5a-dec3-11f1-9c50-04d18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__aefe59fe-dec3-11f1-bdd8-2ad1b9bcbeef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__a32caac6-dec4-11f1-ae85-2cd18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__94779a68-dec4-11f1-9454-04d18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__925a3326-dec4-11f1-a6f5-97c0b9bcbeef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__8c4df92c-dec4-11f1-a212-91a18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__843ab5fe-dec4-11f1-a60f-2cd18e80beef__0__100000.root",
+  "root://cmseos.fnal.gov//eos/uscms/store/group/lnujj/semilep_vbs_skim_run3_v2/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024/WZunpolarized_Wmtolv_Ztojj_QCD_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_2024__97c93830-dec3-11f1-a0a1-2cd18e80beef__0__100000.root"
+ ]
+}

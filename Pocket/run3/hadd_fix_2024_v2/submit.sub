@@ -1,0 +1,18 @@
+# Re-run the 28 missing FNAL hadd outputs, writing to CERN EOS (eosuser).
+# Submit:  condor_submit submit.sub            (all jobs listed in jobs_to_run.txt)
+universe                = vanilla
+executable              = /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/hadd_fix_2024_v2/hadd_job.sh
+arguments               = $Fnx(jobjson)
+transfer_input_files    = /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/hadd_fix_2024_v2/$(jobjson)
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+x509userproxy           = /afs/cern.ch/user/j/jinw/x509up_u126712
+output                  = /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/hadd_fix_2024_v2/logs/$(jobname).out
+error                   = /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/hadd_fix_2024_v2/logs/$(jobname).err
+log                     = /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/hadd_fix_2024_v2/logs/$(jobname).log
+request_cpus            = 1
+request_memory          = 2000
+request_disk            = 6000000
++JobFlavour             = "workday"
+max_retries             = 2
+queue jobjson, jobname from /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/hadd_fix_2024_v2/jobs_to_run.txt

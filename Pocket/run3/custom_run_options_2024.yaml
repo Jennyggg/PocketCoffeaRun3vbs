@@ -1,0 +1,15 @@
+queue: workday
+chunksize: 500000
+scaleout: 180
+mem-per-worker: 15GB
+disk-per-worker: 6GB
+skip-bad-files: false
+dask-scheduler-port: 8786
+custom-setup-commands:
+  - echo $HOME
+  - source /afs/cern.ch/work/j/jinw/public/myenv/bin/activate
+  # 2024 needs the updated PocketCoffea (new-format JER SFs)
+  - export PYTHONPATH=/afs/cern.ch/work/j/jinw/public/PocketCoffea_update:$PYTHONPATH
+  - echo $PYTHONPATH
+  - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+  - echo $LD_LIBRARY_PATH
