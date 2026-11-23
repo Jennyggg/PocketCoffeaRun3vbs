@@ -1,0 +1,82 @@
+classifiers:
+  "2022_postEE":
+    boosted_mu_WW:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_0_iter_72.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_1_iter_110.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_2_iter_118.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_3_iter_139.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_4_iter_102.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_5_iter_144.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_6_iter_110.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_7_iter_133.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_mu_8_iter_161.json
+    boosted_e_WW:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_0_iter_136.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_1_iter_97.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_2_iter_151.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_3_iter_155.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_4_iter_106.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_5_iter_95.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_6_iter_95.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_7_iter_166.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_boosted_e_8_iter_92.json
+    resolved_mu_WW:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_0_iter_152.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_1_iter_176.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_2_iter_138.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_3_iter_180.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_4_iter_155.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_5_iter_166.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_6_iter_149.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_7_iter_167.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_mu_8_iter_189.json
+    resolved_e_WW:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_0_iter_113.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_1_iter_131.json 
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_2_iter_135.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_3_iter_134.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_4_iter_117.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_5_iter_123.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_6_iter_108.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_7_iter_154.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WW_WvsQCD/bdt_resolved_e_8_iter_154.json
+    boosted_mu_WZ:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_0_iter_99.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_1_iter_120.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_2_iter_108.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_3_iter_86.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_4_iter_68.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_5_iter_96.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_6_iter_60.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_7_iter_97.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_mu_8_iter_69.json
+    boosted_e_WZ:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_0_iter_107.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_1_iter_78.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_2_iter_76.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_3_iter_98.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_4_iter_100.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_5_iter_92.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_6_iter_58.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_7_iter_64.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_boosted_e_8_iter_68.json
+    resolved_mu_WZ:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_0_iter_146.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_1_iter_110.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_2_iter_112.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_3_iter_109.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_4_iter_104.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_5_iter_156.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_6_iter_134.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_7_iter_167.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_mu_8_iter_120.json
+    resolved_e_WZ:
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_0_iter_123.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_1_iter_114.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_2_iter_96.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_3_iter_119.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_4_iter_114.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_5_iter_88.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_6_iter_108.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_7_iter_111.json
+      - /afs/cern.ch/work/j/jinw/public/semilep_vbs_base/Pocket/run3/bdt_22EElumi_v5_cuttau21p45_WZ_ZvsQCD/bdt_resolved_e_8_iter_93.json

@@ -15,6 +15,24 @@ HLT_triggers:
       - IsoMu24
     EGamma:
       - Ele32_WPTight_Gsf
+  # 2023: IsoMu24 and Ele30_WPTight_Gsf are unprescaled in Run2023C and D
+  # (checked in 22Sep2023 NanoAOD: every Ele32/IsoMu27 event also fires
+  # Ele30/IsoMu24); EGM 2023 trigger SFs exist only for Ele30 (HLT_SF_Ele30_*),
+  # MUO 2023 SFs for IsoMu24.
+  "2023_preBPix":
+    SingleMuon:
+      - IsoMu24
+    Muon:
+      - IsoMu24
+    EGamma:
+      - Ele30_WPTight_Gsf
+  "2023_postBPix":
+    SingleMuon:
+      - IsoMu24
+    Muon:
+      - IsoMu24
+    EGamma:
+      - Ele30_WPTight_Gsf
   # Ele32_WPTight_Gsf is still unprescaled in 2024, but the EGM 2024 trigger
   # SFs are only provided for Ele30_WPTight_Gsf.
   "2024":

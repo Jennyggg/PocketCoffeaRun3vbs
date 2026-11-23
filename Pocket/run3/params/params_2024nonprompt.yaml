@@ -1,0 +1,88 @@
+# params/params_2024nonprompt.yaml
+#
+# 2024 (Run3 Summer24, NanoAODv15) settings for the nonprompt (fake-rate) measurement:
+# params_2024.yaml with the lepton SFs evaluated on the LOOSE leptons of
+# workflow_evaluate_2024 (MuonLoose: looseId, no iso; ElectronLoose: cutBased >= 1, Veto).
+# Loaded AFTER the generic run3 files so that it wins on every 2024 key.
+#
+# The weights are per event, so tight and loose leptons in the same category get the
+# same (loose) SF; the tight-vs-loose SF difference is covered by an uncertainty.
+#
+# Requires PocketCoffea >= the `update-upstream-2024` branch: the 2024 JER
+# (Summer24Prompt24_JRV2) uses the new ScaleFactor + SFUncertainty format,
+# which the old local jets.py evaluates without its uncertainty (JER up/down
+# would silently equal nominal).
+
+# Full 2024 golden lumi, PdmV numbers
+# https://twiki.cern.ch/twiki/bin/viewauth/CMS/PdmVRun3Analysis#DATA_AN1
+lumi:
+  picobarns:
+    "2024":
+      C: 7260
+      D: 7980
+      E: 11420
+      F: 28040
+      G: 38070
+      H: 5490
+      I: 11560
+      tot: 109950
+
+# Official 2024 MC->data pileup weights for eras C-I (golden JSON), matching the
+# data used (no era B). Per-era weights also exist: puWeights_<era>.json.gz.
+# NB: params/pileup.yaml points 2024 at the 2025 profile; do not load it for 2024.
+pileupJSONfiles:
+  "2024":
+    file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,LUM,puWeights_CDEFGHI.json.gz,2026-04-15}
+    name: Collisions24_CDEFGHI_goldenJSON
+
+# The 2024 HLT paths (IsoMu24, Ele30_WPTight_Gsf) are set in triggers.yaml.
+
+# JERC: Summer24Prompt24 V5 JEC + Summer24Prompt24 JRV2 JER (replaces the
+# provisional V2 JEC + 2023 JER in the old local parameters).
+default_jets_calibration:
+  factory_config_clib:
+    AK4PFPuppi:
+      "2024":
+        json_path: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,JME,jet_jerc.json.gz,2026-07-16}
+        jec_mc: Summer24Prompt24_V5_MC
+        jec_data: Summer24Prompt24_V5_DATA
+        jer: Summer24Prompt24_JRV2_MC
+        level: L1L2L3Res
+    AK8PFPuppi:
+      "2024":
+        json_path: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,JME,fatJet_jerc.json.gz,2026-07-16}
+        jec_mc: Summer24Prompt24_V5_MC
+        jec_data: Summer24Prompt24_V5_DATA
+        jer: Summer24Prompt24_JRV2_MC
+        level: L1L2L3Res
+
+# The electron ID SF working point is taken from object_preselection.Electron.id:
+# cutBased_Veto -> EGM "Veto", matching ElectronLoose (cutBased >= 1).
+object_preselection:
+  Electron:
+    id: cutBased_Veto
+
+lepton_scale_factors:
+  electron_sf:
+    collection: ElectronLoose
+    # No HLT SF exists for the Veto ID; HLT_SF_Ele30_LooseID (cut-based Loose)
+    # is the closest one.
+    trigger_sf:
+      "2024":
+        name: Electron-HLT-SF
+        file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,EGM,electronHlt.json.gz,2025-12-15}
+        path: HLT_SF_Ele30_LooseID
+  muon_sf:
+    collection: MuonLoose
+    # Official 2024 MUO SFs (replace the private params/muon_Z.json.gz).
+    JSONfiles:
+      "2024":
+        file: ${cvmfs:Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15,MUO,muon_Z.json.gz,2026-06-18}
+    # MuonLoose is looseId without an isolation cut: there is no isolation SF
+    # (drop sf_mu_iso from the weights). The loosest IsoMu24 SF provided by MUO is
+    # for Medium ID + Medium PF isolation.
+    sf_name:
+      "2024":
+        id: NUM_LooseID_DEN_TrackerMuons
+        iso: NUM_LoosePFIso_DEN_LooseID
+        trigger: NUM_IsoMu24_DEN_CutBasedIdMedium_and_PFIsoMedium

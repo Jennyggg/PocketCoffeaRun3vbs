@@ -1,24 +1,216 @@
 factors:
   DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
   DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2L-2Jets_MLL-50_PTLL-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2E-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2E-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2E-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2E-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Mu-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Mu-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Mu-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Mu-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Tau-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Tau-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Tau-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  DYto2Tau-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
   TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8: -1.0
+  TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8: -1.0
+  TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -1.0
+  TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -1.0
+  TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -1.0
+  TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -1.0
+  TBbartoLplusNuBbar-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  TbarBtoLminusNuB-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  WW_TuneCP5_13p6TeV_pythia8: -1.0
+  WZ_TuneCP5_13p6TeV_pythia8: -1.0
+  ZZ_TuneCP5_13p6TeV_pythia8: -1.0
+  WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  WWW_4F_TuneCP5_13p6TeV_amcatnlo-madspin-pythia8: -1.0
+  WZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  ZZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.0
+  WGtoLNuG-1Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  ZGto2LG-1Jets_ntgc_5f_TuneCP5_13p6TeV_madgraphMLM-pythia8: -1.0
+  VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8: -1.0
   WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoENu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoENu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoMuNu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoMuNu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoTauNu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoTauNu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
+  WtoTauNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.0
   SingleMuon: 1.0
   Muon: 1.0
   EGamma: 1.0
 factors_up:
   DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
   DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2L-2Jets_MLL-50_PTLL-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2E-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2E-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2E-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2E-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Mu-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Mu-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Mu-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Mu-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Tau-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Tau-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Tau-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  DYto2Tau-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
   TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8: -1.1
+  TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8: -1.1
+  TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -1.1
+  TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -1.1
+  TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -1.1
+  TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -1.1
+  TBbartoLplusNuBbar-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.1
+  TbarBtoLminusNuB-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.1
+  WW_TuneCP5_13p6TeV_pythia8: -1.1
+  WZ_TuneCP5_13p6TeV_pythia8: -1.1
+  ZZ_TuneCP5_13p6TeV_pythia8: -1.1
+  WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.1
+  WWW_4F_TuneCP5_13p6TeV_amcatnlo-madspin-pythia8: -1.1
+  WZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.1
+  ZZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -1.1
+  WGtoLNuG-1Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  ZGto2LG-1Jets_ntgc_5f_TuneCP5_13p6TeV_madgraphMLM-pythia8: -1.1
+  VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8: -1.1
   WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoENu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoENu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoMuNu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoMuNu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoTauNu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoTauNu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
+  WtoTauNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -1.1
   SingleMuon: 1.0
   Muon: 1.0
   EGamma: 1.0
 factors_down:
   DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
   DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2L-2Jets_MLL-50_PTLL-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2E-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2E-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2E-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2E-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Mu-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Mu-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Mu-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Mu-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Tau-2Jets_Bin-0J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Tau-2Jets_Bin-1J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Tau-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  DYto2Tau-2Jets_Bin-MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
   TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8: -0.9
+  TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8: -0.9
+  TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -0.9
+  TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8: -0.9
+  TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -0.9
+  TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8: -0.9
+  TBbartoLplusNuBbar-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -0.9
+  TbarBtoLminusNuB-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8: -0.9
+  WW_TuneCP5_13p6TeV_pythia8: -0.9
+  WZ_TuneCP5_13p6TeV_pythia8: -0.9
+  ZZ_TuneCP5_13p6TeV_pythia8: -0.9
+  WWZ_4F_TuneCP5_13p6TeV_amcatnlo-pythia8: -0.9
+  WWW_4F_TuneCP5_13p6TeV_amcatnlo-madspin-pythia8: -0.9
+  WZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -0.9
+  ZZZ_TuneCP5_13p6TeV_amcatnlo-pythia8: -0.9
+  WGtoLNuG-1Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  ZGto2LG-1Jets_ntgc_5f_TuneCP5_13p6TeV_madgraphMLM-pythia8: -0.9
+  VBFtoLNu_TuneCP5_13p6TeV_madgraph-pythia8: -0.9
   WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoENu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoENu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoENu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoMuNu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoMuNu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoMuNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoTauNu-2Jets_Bin-0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoTauNu-2Jets_Bin-1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
+  WtoTauNu-2Jets_Bin-2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8: -0.9
   SingleMuon: 1.0
   Muon: 1.0
   EGamma: 1.0
